@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Compra entradas para el Festival Rock 2024. Descubre bandas, horarios, ubicación y reserva tus entradas con SoundStage.">
+  <title>Detalles del Concierto - SoundStage</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark navbar-expand-md">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">SoundStage</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="concerts.html">Conciertos</a></li>
+          <li class="nav-item"><a class="nav-link" href="reservations.html">Mis Reservas</a></li>
+          <li class="nav-item"><a class="nav-link" href="adminEventos.html">Admin</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contenido Principal -->
+  <main class="container py-5">
+    <div class="row">
+      <!-- Imagen y Detalles -->
+      <div class="col-md-8 mb-4">
+        <picture>
+          <source [srcset]="concert.imageWebp" type="image/webp">
+          <img [src]="concert.imagePng" loading="lazy" class="img-fluid rounded mb-4" [alt]="concert.title">
+        </picture>
+        <h1 id="concert-title" class="display-5 fw-bold mb-2">Título del concierto</h1>
+        <div class="mb-4">
+          <span id="concert-genre" class="chip">Género</span>
+          <span id="concert-status" class="badge badge-primary ms-2">Disponibilidad</span>
+        </div>
+
+        <h3 class="mt-4 mb-3">Descripción</h3>
+        <p id="concert-description" class="text-secondary lead">
+          Descripción del concierto....Únete al mayor festival de rock del año. Disfruta de las mejores bandas
+          internacionales y locales en un evento único que no puedes perderte. Dos días completos de música,
+          entretenimiento y diversión.
+        </p>
+
+        <h3 class="mt-4 mb-3">Información del Evento</h3>
+        <div class="row">
+          <div class="col-sm-6 mb-3">
+            <p><strong>Fecha:</strong></p>
+            <p id="concert-date" class="text-secondary">DD/MM/AAAA</p>
+          </div>
+          <div class="col-sm-6 mb-3">
+            <p><strong>Hora:</strong></p>
+            <p id="concert-time" class="text-secondary">HH:MM</p>
+          </div>
+          <div class="col-sm-6 mb-3">
+            <p><strong>Ubicación:</strong></p>
+            <p id="concert-location" class="text-secondary">Dirección: Estadio Central, Calle Principal 123</p>
+          </div>
+          <div class="col-sm-6 mb-3">
+            <p><strong>Capacidad:</strong></p>
+            <p id="concert-capacity" class="text-secondary">5000 asientos (3200 disponibles)</p>
+          </div>
+        </div>
+
+        <h3 class="mt-4 mb-3">Artistas</h3>
+        <ul id="concert-artists" class="list-unstyled">
+          <!-- Angular insertará <li> por cada artista -->
+          <li class="mb-2"><strong>Banda Principal</strong> - Rock alternativo</li>
+          <li class="mb-2"><strong>Artista 1</strong> - Rock clásico</li>
+          <li class="mb-2"><strong>Artista 2</strong> - Rock moderno</li>
+          <li class="mb-2"><strong>Artista 3</strong> - Rock experimental</li>
+        </ul>
+      </div>
+
+      <!-- Panel de Reserva -->
+      <div class="col-md-4">
+        <div class="card sticky-top">
+          <div class="card-body">
+            <h3 class="card-title mb-4">Reservar Entradas</h3>
+
+            <div class="mb-3">
+              <label for="ticketType" class="form-label">Tipo de Entrada</label>
+              <select class="form-control" id="ticketType">
+                <option value="general" selected>General - $50</option>
+                <option value="vip">VIP - $100</option>
+                <option value="premium">Premium - $120</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="quantity" class="form-label">Cantidad</label>
+              <input type="number" class="form-control" id="quantity" min="1" max="10" value="1">
+            </div>
+
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                  <span>Subtotal:</span>
+                  <span id="subtotal">$50.00</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                  <span>Impuestos (10%):</span>
+                  <span id="taxes">$5.00</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                  <strong>Total:</strong>
+                  <strong id="total">$55.00</strong>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-primary w-100 btn-lg mb-2">Proceder al Pago</button>
+            <button class="btn btn-outline-primary w-100">Agregar a Carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer mt-5">
+    <div class="container text-center py-4">
+      <p class="footer-brand">SoundStage</p>
+      <p class="footer-text">&copy; 2026 SoundStage. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+</body>
+
+</html>

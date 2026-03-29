@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Compra entradas para los mejores conciertos del año con SoundStage. Descubre artistas, géneros y eventos cercanos a ti.">
+  <title>SoundStage - Compra de Entradas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  </noscript>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark navbar-expand-md">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">SoundStage</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="concerts.html">Conciertos</a></li>
+          <li class="nav-item"><a class="nav-link" href="reservations.html">Mis Reservas</a></li>
+          <li class="nav-item"><a class="nav-link" href="adminEventos.html">Admin</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title mb-4">Descubre Grandes Conciertos</h1>
+      <p class="lead text-secondary mb-4">Reserva tus entradas para los mejores eventos musicales del año</p>
+      <a href="concerts.html" class="btn btn-primary btn-lg">Ver Conciertos</a>
+    </div>
+  </section>
+
+  <!-- Contenido Principal -->
+  <main class="container py-5">
+    <section class="mb-5">
+      <h2 class="mb-4">Próximos Eventos</h2>
+      <div class="row g-4">
+        <!-- Card 1 -->
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card">
+            <picture>
+              <source srcset="img/rock1.webp" type="image/webp">
+              <img src="img/rock1.png" loading="lazy" class="card-img-top" alt="Concierto de rock con público en vivo">
+            </picture>
+            <div class="card-body">
+              <h3 class="card-title">Concierto Rock</h3>
+              <p class="card-text text-secondary">Artista Principal</p>
+              <div class="mb-3">
+                <span class="chip">Rock</span>
+              </div>
+              <a href="detail.html" class="btn btn-primary w-100">Más Detalles</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card">
+            <picture>
+              <source srcset="img/jazz1.webp" type="image/webp">
+              <img src="img/jazz1.png" loading="lazy" class="card-img-top"
+                alt="Concierto de jazz con saxofonista en el escenario">
+            </picture>
+            <div class="card-body">
+              <h3 class="card-title">Concierto Jazz</h3>
+              <p class="card-text text-secondary">Artista Principal</p>
+              <div class="mb-3">
+                <span class="chip">Jazz</span>
+              </div>
+              <a href="detail.html" class="btn btn-primary w-100">Más Detalles</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card">
+            <picture>
+              <source srcset="img/pop1.webp" type="image/webp">
+              <img src="img/pop1.png" loading="lazy" class="card-img-top"
+                alt="Concierto pop con cantante y luces de colores">
+            </picture>
+            <div class="card-body">
+              <h3 class="card-title">Concierto Pop</h3>
+              <p class="card-text text-secondary">Artista Principal</p>
+              <div class="mb-3">
+                <span class="chip">Pop</span>
+              </div>
+              <a href="detail.html" class="btn btn-primary w-100">Más Detalles</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card">
+            <picture>
+              <source srcset="img/rock2.webp" type="image/webp">
+              <img src="img/rock2.png" loading="lazy" class="card-img-top"
+                alt="Concierto de rock con guitarra eléctrica">
+            </picture>
+            <div class="card-body">
+              <h3 class="card-title">Concierto Rock</h3>
+              <p class="card-text text-secondary">Artista Principal</p>
+              <div class="mb-3">
+                <span class="chip">Rock</span>
+              </div>
+              <a href="detail.html" class="btn btn-primary w-100">Más Detalles</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card">
+            <picture>
+              <source srcset="img/jazz2.webp" type="image/webp">
+              <img src="img/jazz2.png" loading="lazy" class="card-img-top"
+                alt="Concierto de jazz con contrabajo y músicos en el escenario">
+            </picture>
+            <div class="card-body">
+              <h3 class="card-title">Concierto Jazz</h3>
+              <p class="card-text text-secondary">Artista Principal</p>
+              <div class="mb-3">
+                <span class="chip">Jazz</span>
+              </div>
+              <a href="detail.html" class="btn btn-primary w-100">Más Detalles</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card">
+            <picture>
+              <source srcset="img/pop2.webp" type="image/webp">
+              <img src="img/pop2.png" loading="lazy" class="card-img-top"
+                alt="Concierto pop con escenario iluminado y público animado">
+            </picture>
+            <div class="card-body">
+              <h3 class="card-title">Concierto Pop</h3>
+              <p class="card-text text-secondary">Artista Principal</p>
+              <div class="mb-3">
+                <span class="chip">Pop</span>
+              </div>
+              <a href="detail.html" class="btn btn-primary w-100">Más Detalles</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card">
+            <picture>
+              <source srcset="img/rock3.webp" type="image/webp">
+              <img src="img/rock3.png" loading="lazy" class="card-img-top"
+                alt="Concierto de rock con guitarra y batería">
+            </picture>
+            <div class="card-body">
+              <h3 class="card-title">Concierto Rock</h3>
+              <p class="card-text text-secondary">Artista Principal</p>
+              <div class="mb-3">
+                <span class="chip">Rock</span>
+              </div>
+              <a href="detail.html" class="btn btn-primary w-100">Más Detalles</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card">
+            <picture>
+              <source srcset="img/jazz3.webp" type="image/webp">
+              <img src="img/jazz3.png" loading="lazy" class="card-img-top"
+                alt="Concierto de jazz con trompeta y público">
+            </picture>
+            <div class="card-body">
+              <h3 class="card-title">Concierto Jazz</h3>
+              <p class="card-text text-secondary">Artista Principal</p>
+              <div class="mb-3">
+                <span class="chip">Jazz</span>
+              </div>
+              <a href="detail.html" class="btn btn-primary w-100">Más Detalles</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 9 -->
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card">
+            <picture>
+              <source srcset="img/pop3.webp" type="image/webp">
+              <img src="img/pop3.png" loading="lazy" class="card-img-top"
+                alt="Concierto pop con cantante y efectos de luces">
+            </picture>
+            <div class="card-body">
+              <h3 class="card-title">Concierto Pop</h3>
+              <p class="card-text text-secondary">Artista Principal</p>
+              <div class="mb-3">
+                <span class="chip">Pop</span>
+              </div>
+              <a href="detail.html" class="btn btn-primary w-100">Más Detalles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer mt-5">
+    <div class="container text-center py-4">
+      <p class="footer-brand">SoundStage</p>
+      <p class="footer-text">&copy; 2026 SoundStage. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+</body>
+
+</html>

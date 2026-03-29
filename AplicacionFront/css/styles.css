@@ -1,0 +1,375 @@
+/* ======= Variables y body ======= */
+:root {
+  --primary-color: #5a5a86;
+  --accent-color: #a3a3c2;
+  --bg-color: #ffffff;
+  --border-color: #2d2d4e;
+  --text-primary: black;
+  --text-secondary: #2d2d4e;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+/* =======  General  ======= */
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(to bottom, #4b367c, #8a7bcf) !important;
+  border-bottom: 1px solid var(--border-color);
+  padding: 18px 30px;
+}
+
+.navbar-brand {
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.navbar .nav-link {
+  font-size: 1rem;
+  margin-left: 10px;
+}
+
+/* Tarjetas generales */
+.card {
+  background-color: var(--bg-color) !important;
+  border-color: var(--border-color) !important;
+  border-radius: 12px;
+  transition: transform 0.2s, border-color 0.2s;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-width: 3px;
+  border-color: #3d3d5e;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Buttons generales */
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.btn-primary:hover {
+  background-color: #481b92 !important;
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-sm {
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: white;
+}
+
+/* Badges generales */
+.badge-primary {
+  background-color: var(--primary-color) !important;
+  border-radius: 12px;
+}
+
+.badge-accent {
+  background-color: var(--accent-color) !important;
+}
+
+/* Alerts */
+.alert {
+  border-radius: 8px;
+}
+
+/* Gradiente de texto */
+.text-gradient {
+  background: linear-gradient(135deg, #a78bfa, #f472b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =======  Index  ======= */
+
+/* Hero */
+.hero-section {
+  width: 100%;
+  min-height: 35vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(244, 114, 182, 0.05));
+  padding: 20px 15px;
+}
+
+.hero-content {
+  max-width: 800px;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.hero-section .lead {
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+  color: var(--text-secondary);
+}
+
+.hero-section .btn {
+  padding: 8px 20px;
+  font-size: 0.95rem;
+}
+
+/* =======  Details  ======= */
+
+/* Título del concierto */
+#concert-title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+/* Descripción */
+#concert-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Información del evento */
+#concert-date,
+#concert-time,
+#concert-location,
+#concert-capacity {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* Lista de artistas */
+#concert-artists li {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* Badge de disponibilidad */
+#concert-status.badge {
+  font-size: 0.85rem;
+  padding: 0.35em 0.65em;
+  vertical-align: middle;
+}
+
+/* Panel de reserva */
+.card.sticky-top {
+  top: 20px;
+  height: auto;
+  overflow: visible;
+}
+
+.card.sticky-top .card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card.sticky-top .card-body {
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+/* Inputs y select */
+#ticketType,
+#quantity {
+  background-color: var(--bg-color) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-color);
+  padding: 0.2rem 0.4rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  box-sizing: border-box;
+}
+
+/* Totales del panel */
+#subtotal,
+#taxes,
+#total {
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+/* =======  Administrador  ======= */
+
+/* Chips/Tags generales */
+.chip {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin: 4px;
+  transition: all 0.2s;
+}
+
+.chip:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.chip.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* Formularios */
+.form-control {
+  background-color: var(--bg-color) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.form-control:focus {
+  border-color: var(--border-color) !important;
+  box-shadow: 0 0 0 0.2rem rgba(124, 58, 237, 0.25);
+}
+
+/* Tablas */
+.table {
+  color: var(--text-secondary);
+}
+
+.table thead th {
+  background-color: var(--bg-color);
+  border-bottom-color: var(--border-color);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.table tbody td {
+  border-bottom-color: var(--border-color);
+  vertical-align: middle;
+}
+
+.table tbody tr {
+  transition: background 0.2s;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(124, 58, 237, 0.05);
+}
+
+
+/* Sidebar */
+.sidebar-admin {
+  background: var(--bg-color);
+  border-right: 1px solid var(--border-color);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.sidebar-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 5px 0;
+  transition: all 0.2s;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+  background: rgba(124, 58, 237, 0.2);
+  color: #a78bfa;
+}
+
+/* =======  Footer  ======= */
+.footer {
+  background: linear-gradient(to top, #4b367c, #8a7bcf);
+  border-top: 1px solid var(--border-color);
+  padding: 5px 0 20px;
+  text-align: center;
+}
+
+.footer-brand {
+  color: white;
+  font-weight: 800;
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+}
+
+.footer-text {
+  color: #e5e7eb;
+  margin: 0;
+}
+
+/* =======  Responsive  ======= */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 350px;
+    padding: 50px 0;
+  }
+
+  .sidebar-admin {
+    display: none;
+  }
+
+  #concert-title {
+    font-size: 1.8rem;
+  }
+  #concert-description {
+    font-size: 0.95rem;
+  }
+
+  .table-responsive {
+  overflow-x: auto;
+}
+}
+  
+@media (max-width: 576px) {
+  .card {
+    max-width: 100%;
+  }
+}
+
+/* ======= Focus / Accesibility ======= */
+button:focus, .form-control:focus, a:focus {
+  outline: 3px solid #a78bfa;
+  outline-offset: 2px;
+}

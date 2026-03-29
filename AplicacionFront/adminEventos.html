@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin - SoundStage</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark navbar-expand-md">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">SoundStage</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="concerts.html">Conciertos</a></li>
+          <li class="nav-item"><a class="nav-link" href="reservations.html">Mis Reservas</a></li>
+          <li class="nav-item"><a class="nav-link active" href="adminEventos.html">Admin</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar Admin -->
+      <div class="col-md-2 sidebar-admin">
+        <h5 class="mb-4"><strong>Administrador</strong></h5>
+        <nav class="nav flex-column">
+          <a class="sidebar-link active" href="adminEventos.html">Eventos</a>
+          <a class="sidebar-link" href="adminUsuarios.html">Usuarios</a>
+          <a class="sidebar-link" href="adminPerfiles.html">Perfiles</a>
+          <a class="sidebar-link" href="adminTiposEvento.html">Tipo Evento</a>
+        </nav>
+      </div>
+
+      <!-- Contenido Principal -->
+      <div id="dashboard-section" class="col-md-10">
+        <main class="container py-5">
+          <!-- Tabla de Conciertos -->
+          <div class="card mb-5">
+            <div class="card-header bg-transparent border-bottom border-secondary">
+              <h5 class="card-title mb-0">Gestion de Eventos</h5>
+            </div>
+            <!-- Filtros -->
+            <div class="mb-4">
+              <span class="chip active">Todos</span>
+              <span class="chip">Destacados</span>
+              <span class="chip">Activos</span>
+              <span class="chip">Cancelados</span>
+              <span class="chip">Finalizados</span>
+            </div>
+            <!-- Tabla -->
+            <div class="card-body p-0">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Evento</th>
+                    <th>Aforo</th>
+                    <th>Fecha</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th>Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Festival Rock</td>
+                    <td>5000</td>
+                    <td>15/06/2026</td>
+                    <td>50€</td>
+                    <td><span class="badge badge-primary">Activo</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary">Editar</button>
+                      <button class="btn btn-sm btn-outline-warning">Cancelar</button>
+                      <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                      <button class="btn btn-sm btn-outline-secondary">Detalle</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Noche de Jazz</td>
+                    <td>1500</td>
+                    <td>22/06/2026</td>
+                    <td>35€</td>
+                    <td><span class="badge badge-accent">Destacado</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary">Editar</button>
+                      <button class="btn btn-sm btn-outline-warning">Cancelar</button>
+                      <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                      <button class="btn btn-sm btn-outline-secondary">Detalle</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Formulario para Crear Concierto -->
+          <div class="card">
+            <div class="card-header bg-transparent border-bottom border-secondary">
+              <h5 class="card-title mb-0">Crear Nuevo Evento</h5>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="eventName" class="form-label">Nombre del Evento</label>
+                    <input type="text" class="form-control" id="eventName" placeholder="Nombre del evento">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="eventDate" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="eventDate">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="eventLocation" class="form-label">Ubicación</label>
+                    <input type="text" class="form-control" id="eventLocation" placeholder="Ubicación del evento">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="eventCapacity" class="form-label">Aforo</label>
+                    <input type="number" class="form-control" id="eventCapacity" placeholder="Aforo del evento">
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="eventDescription" class="form-label">Descripción</label>
+                  <textarea class="form-control" id="eventDescription" rows="3" placeholder="Describe el evento"></textarea>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <button type="button" class="btn btn-outline-secondary">Cancelar</button>
+                  <button type="submit" class="btn btn-primary">Crear Concierto</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer mt-5">
+    <div class="container text-center py-4">
+      <p class="footer-brand">SoundStage</p>
+      <p class="footer-text">&copy; 2026 SoundStage. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+</body>
+
+</html>
