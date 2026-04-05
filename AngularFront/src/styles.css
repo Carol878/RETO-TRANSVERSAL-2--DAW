@@ -1,1 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
+.navbar, .btn, .footer {
+  background: linear-gradient(180deg, #4d0f88, #935add);
+}
