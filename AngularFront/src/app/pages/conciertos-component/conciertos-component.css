@@ -1,0 +1,137 @@
+
+/*   CONTENEDOR PRINCIPAL DEL CATÁLOGO */
+.contenedor-catalogo {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+}
+
+.titulo-principal {
+    text-align: center;
+    font-weight: 800; /* Un poco más de peso */
+    color: #333;
+    margin-bottom: 4rem;
+    letter-spacing: -1px;
+}
+
+/* Ajuste del espaciado entre el filtro y las cartas */
+.layout-principal {
+    display: flex;
+}
+
+/*PANEL DE FILTROS (IZQUIERDA) */
+.tarjeta-filtros {
+    background-color: #fcfcfc; /* Mismo fondo que tus cards */
+    border-radius: 20px;       /* Mismo redondeo que tus cards */
+    padding: 2rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Sombra igualada */
+    position: sticky;
+    top: 30px; /* Se queda pegado al bajar el scroll */
+    z-index: 10;
+}
+
+.titulo-filtros {
+    font-weight: 700;
+    color: #2b2b2b;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icono-filtro {
+    color: #7b2cbf;
+}
+
+.grupo-filtro {
+    margin-bottom: 1.8rem;
+}
+
+.etiqueta-filtro {
+    color: #888;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.input-filtro,
+.select-filtro {
+    border-radius: 12px;
+    border: 1px solid #eee;
+    background-color: #fff;
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.input-filtro:focus,
+.select-filtro:focus {
+    border-color: #7b2cbf;
+    box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.1);
+    outline: none;
+}
+
+.boton-aplicar-filtro {
+    width: 100%;
+    font-weight: 700;
+    padding: 1rem;
+    margin-top: 1rem;
+    background-color: #7b2cbf;
+    color: white;
+    border-radius: 12px;
+    border: none;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(123, 44, 191, 0.3);
+}
+
+.boton-aplicar-filtro:hover {
+    background-color: #5a1e8c;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(123, 44, 191, 0.4);
+}
+
+/* ZONA DE RESULTADOS (DERECHA) */
+.columna-resultados {
+    padding-left: 1.5rem;
+}
+
+.cuadricula-resultados {
+    justify-content: flex-start; /* Alineadas a la izquierda */
+}
+
+.item-evento {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+/*ESTADO VACÍO (NO HAY RESULTADOS) */
+.contenedor-estado-vacio {
+    text-align: center;
+    padding: 5rem 2rem;
+}
+
+.tarjeta-estado-vacio {
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 4rem;
+    border: 2px dashed #dee2e6;
+}
+
+.icono-vacio {
+    font-size: 3.5rem;
+    color: #adb5bd;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.texto-vacio {
+    color: #6c757d;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
