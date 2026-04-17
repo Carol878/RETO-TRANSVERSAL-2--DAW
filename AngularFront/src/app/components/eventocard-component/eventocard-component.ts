@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
-import { EventodetalleComponent } from '../../pages/eventodetalle-component/eventodetalle-component';
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Evento } from '../../models/evento.model';
 
 @Component({
   selector: 'app-eventocard-component',
-  imports: [EventodetalleComponent],
+  standalone: true,
+  imports: [RouterLink], // Necesario para el botón de Detalles
   templateUrl: './eventocard-component.html',
-  styleUrl: './eventocard-component.css',
+  styleUrl: './eventocard-component.css'
 })
-export class EventocardComponent {}
+export class EventocardComponent {
+  // El decorador @Input permite que le inyectemos un Evento a esta tarjeta
+  @Input() evento!: Evento;
+}

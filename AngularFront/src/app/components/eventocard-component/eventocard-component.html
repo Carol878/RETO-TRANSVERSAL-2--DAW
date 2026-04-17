@@ -1,1 +1,20 @@
-<p>Donde irán las tarjetas de contenido</p>
+@if (evento) {
+<div class="card shadow border-0 custom-card">
+
+  <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=500&q=80"
+       class="custom-card-img"
+       alt="Imagen de {{ evento.nombre }}">
+
+  <div class="card-body d-flex flex-column text-center p-4">
+    <h5 class="card-title fw-bold text-uppercase mt-2">{{ evento.nombre }}</h5>
+    <p class="card-text text-muted mb-4">{{ evento.fechaInicio }}</p>
+
+    <div class="mt-auto">
+      <a [routerLink]="['/detalles', evento.idEvento]" class="btn btn-detalles px-4">
+        Detalles
+      </a>
+    </div>
+  </div>
+
+</div>
+}
