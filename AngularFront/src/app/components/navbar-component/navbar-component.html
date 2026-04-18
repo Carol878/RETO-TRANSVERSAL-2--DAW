@@ -16,16 +16,18 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ms-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/conciertos" routerLinkActive="active">
+        <a class="nav-link" routerLink="/concerts" routerLinkActive="active">
           Conciertos
         </a>
       </li>
 
+      @if (isLoggedIn) {
       <li class="nav-item">
-        <a class="nav-link" routerLink="/reservas" routerLinkActive="active">
+        <a class="nav-link" routerLink="/misreservas" routerLinkActive="active">
           Mis Reservas
         </a>
       </li>
+      }
       @if (!isLoggedIn) {
         <li class="nav-item">
           <a class="nav-link" routerLink="/login" routerLinkActive="active">
@@ -34,11 +36,11 @@
         </li>
       }
       @if (isLoggedIn) {
-        <li class="nav-item">
-          <a class="nav-link" (click)="logout()">
-            Cerrar Sesión
-          </a>
-        </li>
+      <li class="nav-item">
+        <a class="nav-link" style="cursor: pointer;" (click)="logout()">
+          Cerrar Sesión
+        </a>
+      </li>
       }
     </ul>
   </div>

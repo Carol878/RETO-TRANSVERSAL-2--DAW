@@ -20,6 +20,7 @@ export class NavbarComponent {
     this.isLoggedIn = this.authService.isLoggedIn();
   }
 
+
   logout() {
     this.authService.logout();
     this.isLoggedIn = false;

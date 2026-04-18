@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: 'login',
     loadComponent: () =>
       import('./pages/login-component/login-component').then(m => m.LoginComponent)},
-  
+
   // 5. La ruta del registro
   { path: 'register',
     loadComponent: () =>
@@ -26,5 +26,13 @@ export const routes: Routes = [
 
   // 6. Si alguien entra a localhost:4200 sin nada, le mandamos a /home
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', redirectTo: '/home' }
+  { path: '**', redirectTo: '/home' },
+
+  // 7. Añadimos la ruta de Mis Reservas (Lazy loading)
+    { path: 'misreservas',
+      loadComponent: () =>
+        import('./pages/misreservas-component/misreservas-component').then(m => m.MisreservasComponent)},
+
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '**', redirectTo: '/home' }
 ];
