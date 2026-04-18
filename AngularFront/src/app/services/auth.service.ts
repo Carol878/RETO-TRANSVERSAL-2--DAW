@@ -7,16 +7,14 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-private apiUrl = 'http://localhost:9000'; 
+private apiUrl = 'http://localhost:9000/';
 
   constructor(private http: HttpClient, private router: Router) {}
-
 
   //Login
   login(email: string, password: string) {
     return this.http.post<{ token: string }>(`${this.apiUrl}usuarios/login`, {email, password});
   }
-
 
   //Registro
   register(data: any) {
@@ -27,6 +25,11 @@ private apiUrl = 'http://localhost:9000';
   saveToken(token: string) {
     localStorage.setItem('token', token);
   }
+
+  // Obtener el Token
+    getToken(): string | null {
+      return localStorage.getItem('token');
+    }
 
   logout() {
     localStorage.removeItem('token');
