@@ -1,0 +1,142 @@
+/* Contenedor principal */
+.contenedor-detalle-evento {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+/* Botón Volver (Negrita y Blanco sobre fondo oscuro) */
+.boton-volver {
+  display: inline-block;
+  background-color: #6A25A4;
+  color: white !important;
+  font-weight: bold;
+  padding: 0.6rem 1.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+.boton-volver:hover {
+  background-color: #6A25A4;
+  transform: translateX(-5px);
+}
+
+/* Imagen del evento */
+.imagen-presentacion {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 1rem 3rem rgba(0,0,0,0.175);
+}
+
+/* Elementos de texto */
+.etiqueta-categoria {
+  background-color: #7b2cbf;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.titulo-evento {
+  font-weight: 800;
+  margin-top: 1rem;
+  color: #333;
+  font-size: 3rem;
+}
+
+.fecha-evento {
+  color: #6c757d;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.subtitulo-detalle {
+  font-weight: 700;
+  margin-top: 1.5rem;
+}
+
+.texto-descripcion {
+  line-height: 1.8;
+  color: #444;
+}
+
+/* Bloque de estadísticas */
+.contenedor-estadisticas {
+  margin: 2rem 0;
+}
+
+.valor-dato {
+  font-weight: 800;
+  margin: 0;
+}
+
+.leyenda-dato {
+  color: #6c757d;
+}
+
+.borde-lateral {
+  border-left: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+}
+
+.texto-precio {
+  color: #198754;
+}
+
+.ubicacion-evento {
+  color: #6c757d;
+  margin-top: 1rem;
+}
+
+/* Botón Reservar (Color Morado) */
+.boton-accion-reserva {
+  width: 100%;
+  background-color: #7b2cbf; /* Color morado de los botones detalles */
+  color: white;
+  border: none;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  border-radius: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.boton-accion-reserva:hover {
+  background-color: #6a25a4;
+  transform: translateY(-2px);
+}
+
+/* Estado de carga */
+.contenedor-carga {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.spinner-carga {
+  width: 3rem;
+  height: 3rem;
+  border: 0.25em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  color: #7b2cbf;
+  animation: spinner-border .75s linear infinite;
+}
+
+.texto-carga {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: #6c757d;
+}
+
+@keyframes spinner-border {
+  to { transform: rotate(360deg); }
+}

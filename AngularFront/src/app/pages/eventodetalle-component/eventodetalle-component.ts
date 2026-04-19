@@ -9,7 +9,8 @@ import { ReservaService } from '../../services/reserva.service';
   selector: 'app-eventodetalle-component',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './eventodetalle-component.html'
+  templateUrl: './eventodetalle-component.html',
+  styleUrl: './eventodetalle-component.css'
 })
 
 export class EventodetalleComponent implements OnInit {
@@ -25,18 +26,6 @@ export class EventodetalleComponent implements OnInit {
       private cdr: ChangeDetectorRef // 2. Inyectamos el despertador
       ) {}
 
-   /*ngOnInit(): void {
-      // Sacamos el ID de la URL
-      const id = this.route.snapshot.paramMap.get('id');
-      if (id) {
-        // Llamamos al backend para traernos solo este evento
-        this.eventoService.findById(Number(id)).subscribe({
-          // AÑADIMOS ": Evento" y ": any" para que TypeScript sea feliz
-          next: (data: Evento) => this.evento = data,
-          error: (err: any) => console.error("Error al cargar los detalles del evento:", err)
-        });
-      }
-    } */
       ngOnInit(): void {
           const id = this.route.snapshot.paramMap.get('id');
 
