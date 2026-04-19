@@ -1,48 +1,68 @@
-<nav class="navbar navbar-expand-lg navbar-dark px-4">
-  <a class="navbar-brand fw-bold" routerLink="/">SoundStage</a>
+<nav class="navbar navbar-expand-md barra-navegacion-principal">
+  <div class="container-fluid">
+    <a class="navbar-brand marca-soundstage" routerLink="/">SoundStage</a>
 
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarNav"
-    aria-controls="navbarNav"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/concerts" routerLinkActive="active">
-          Conciertos
-        </a>
-      </li>
+    <div class="collapse navbar-collapse" id="menuPrincipal">
+      <ul class="navbar-nav ms-auto grupo-enlaces-navegacion">
 
-      @if (isLoggedIn) {
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/misreservas" routerLinkActive="active">
-          Mis Reservas
-        </a>
-      </li>
-      }
-      @if (!isLoggedIn) {
         <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">
-            Iniciar Sesión
-          </a>
+          <a class="nav-link enlace-menu-blanco" routerLink="/concerts" routerLinkActive="activo">Conciertos</a>
         </li>
-      }
-      @if (isLoggedIn) {
-      <li class="nav-item">
-        <a class="nav-link" style="cursor: pointer;" (click)="logout()">
-          Cerrar Sesión
-        </a>
-      </li>
-      }
-    </ul>
+
+        <li class="nav-item">
+          <a class="nav-link enlace-menu-blanco" routerLink="/misreservas" routerLinkActive="activo">Mis Reservas</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link enlace-menu-blanco" routerLink="/admin/eventos" routerLinkActive="activo">Admin</a>
+        </li>
+
+        <li class="nav-item">
+          @if (!estaLogueado()) {
+          <a class="boton-personalizado-identificacion" routerLink="/login">Iniciar sesión</a>
+          } @else {
+          <button (click)="salir()" class="boton-personalizado-identificacion">Cerrar sesión</button>
+          }
+        </li>
+
+      </ul>
+    </div>
   </div>
 </nav>
+<!--<nav class="navbar navbar-expand-md barra-navegacion-principal">
+  <div class="container-fluid">
+    <a class="navbar-brand marca-soundstage" routerLink="/">SoundStage</a>
 
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menuPrincipal">
+      <ul class="navbar-nav ms-auto grupo-enlaces-navegacion">
+
+        <li class="nav-item">
+          <a class="nav-link enlace-menu-concierto" routerLink="/concerts" routerLinkActive="activo">Conciertos</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link enlace-menu-reserva" routerLink="/misreservas" routerLinkActive="activo">Mis Reservas</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link enlace-menu-admin" (click)="intentarEntrarAdmin()" role="button">Admin</a>
+        </li>
+
+        <li class="nav-item">
+          <button (click)="manejarSesion()" class="boton-acceso-principal">
+            {{ estaLogueado() ? 'Cerrar sesión' : 'Iniciar sesión' }}
+          </button>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>-->
