@@ -1,0 +1,16 @@
+.tabla-perfiles-estilizada {
+  width: 100%;
+  background: white;
+  border-radius: 15px;
+  border: 1px solid #2d2d4e;
+}
+
+.nombre-perfil-resaltado { font-weight: 800; color: #2d2d4e; }
+
+.boton-ajustes-perfil {
+  border: 1px solid #7b2cbf;
+  color: #7b2cbf;
+  background: transparent;
+  padding: 5px 15px;
+  border-radius: 6px;
+}

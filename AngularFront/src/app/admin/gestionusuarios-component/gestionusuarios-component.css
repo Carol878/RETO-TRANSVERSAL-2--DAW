@@ -1,0 +1,46 @@
+.contenedor-gestion-usuarios { padding: 20px; }
+
+.fila-cabecera-pagina {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.boton-nuevo-registro {
+  background-color: #7b2cbf;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.tarjeta-blanca-usuarios {
+  background: white;
+  border: 1px solid #2d2d4e;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.etiqueta-rol-usuario {
+  background-color: rgba(123, 44, 191, 0.1);
+  color: #7b2cbf;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.enlace-accion-editar {
+  color: #5a5a86;
+  border: none;
+  background: none;
+  margin-right: 10px;
+  }
+
+.enlace-accion-borrar
+  { color: #dc3545;
+  border: none;
+  background: none;
+  }

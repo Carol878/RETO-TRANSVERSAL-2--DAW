@@ -1,1 +1,92 @@
-<p>gestioneventos-component works!</p>
+<section class="contenedor-gestion-eventos">
+
+  <header class="cabecera-seccion-admin">
+    <h2 class="titulo-seccion-humano">Gestión de Eventos</h2>
+    <div class="contenedor-pildoras-filtro">
+      <span class="pildora-filtro activa">Todos</span>
+      <span class="pildora-filtro">Destacados</span>
+      <span class="pildora-filtro">Activos</span>
+      <span class="pildora-filtro">Cancelados</span>
+      <span class="pildora-filtro">Finalizados</span>
+    </div>
+  </header>
+
+  <article class="tarjeta-blanca-administracion mb-5">
+    <div class="cuerpo-tabla-responsiva">
+      <table class="tabla-datos-estilizada">
+        <thead>
+        <tr>
+          <th>Evento</th>
+          <th>Aforo</th>
+          <th>Fecha</th>
+          <th>Precio</th>
+          <th>Estado</th>
+          <th>Opciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (evento of listaEventos; track evento.idEvento) {
+        <tr>
+          <td class="texto-resaltado">{{ evento.nombre }}</td>
+          <td>{{ evento.aforoMaximo }}</td>
+          <td>{{ evento.fechaInicio }}</td>
+          <td class="texto-precio">{{ evento.precio }}€</td>
+          <td>
+              <span [class]="'etiqueta-estado ' + evento.estado.toLowerCase()">
+                {{ evento.estado }}
+              </span>
+          </td>
+          <td class="celda-acciones">
+            <button class="boton-tabla editar" (click)="editar(evento.idEvento)">Editar</button>
+            <button class="boton-tabla cancelar" (click)="cancelar(evento.idEvento)">Cancelar</button>
+            <button class="boton-tabla eliminar" (click)="borrar(evento.idEvento)">Borrar</button>
+          </td>
+        </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="tarjeta-blanca-administracion">
+    <div class="cabecera-tarjeta-formulario">
+      <h5 class="subtitulo-formulario">Crear Nuevo Evento</h5>
+    </div>
+    <div class="cuerpo-formulario">
+      <form (ngSubmit)="crearEvento()">
+        <div class="fila-formulario">
+          <div class="campo-grupo">
+            <label class="etiqueta">Nombre del Evento</label>
+            <input type="text" class="entrada-texto" [(ngModel)]="nuevoEvento.nombre" name="nombre" placeholder="Ej: Festival Rock">
+          </div>
+          <div class="campo-grupo">
+            <label class="etiqueta">Fecha</label>
+            <input type="date" class="entrada-texto" [(ngModel)]="nuevoEvento.fechaInicio" name="fecha">
+          </div>
+        </div>
+
+        <div class="fila-formulario">
+          <div class="campo-grupo">
+            <label class="etiqueta">Ubicación</label>
+            <input type="text" class="entrada-texto" [(ngModel)]="nuevoEvento.ubicacion" name="ubicacion" placeholder="Estadio Olímpico">
+          </div>
+          <div class="campo-grupo">
+            <label class="etiqueta">Aforo Máximo</label>
+            <input type="number" class="entrada-texto" [(ngModel)]="nuevoEvento.aforo" name="aforo">
+          </div>
+        </div>
+
+        <div class="campo-grupo mb-4">
+          <label class="etiqueta">Descripción del Evento</label>
+          <textarea class="area-texto" rows="3" [(ngModel)]="nuevoEvento.descripcion" name="descripcion"></textarea>
+        </div>
+
+        <div class="pie-formulario-acciones">
+          <button type="button" class="boton-secundario">Descartar</button>
+          <button type="submit" class="boton-primario">Guardar Concierto</button>
+        </div>
+      </form>
+    </div>
+  </article>
+
+</section>

@@ -1,1 +1,46 @@
-<p>gestionusuarios-component works!</p>
+<section class="contenedor-gestion-usuarios">
+  <div class="fila-cabecera-pagina">
+    <h2 class="titulo-principal-seccion">Control de Usuarios</h2>
+    <button class="boton-nuevo-registro">+ Crear Nuevo Usuario</button>
+  </div>
+
+  <div class="tarjeta-blanca-usuarios">
+    <div class="encabezado-tabla-usuarios">
+      <h5 class="subtitulo-seccion">Listado de Personas Registradas</h5>
+    </div>
+
+    <div class="espacio-tabla-usuarios">
+      <table class="tabla-humanizada">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre Completo</th>
+          <th>Correo Electrónico</th>
+          <th>Rol / Perfil</th>
+          <th>Estado Actual</th>
+          <th>Opciones de Gestión</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (usuario of usuarios; track usuario.id) {
+        <tr>
+          <td class="celda-id">#{{ usuario.id }}</td>
+          <td class="celda-nombre-negrita">{{ usuario.nombre }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>
+            <span class="etiqueta-rol-usuario">{{ usuario.perfil }}</span>
+          </td>
+          <td>
+            <span class="punto-estado-activo">Activo</span>
+          </td>
+          <td class="celda-botones-accion">
+            <button class="enlace-accion-editar">Editar</button>
+            <button class="enlace-accion-borrar">Eliminar</button>
+          </td>
+        </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
