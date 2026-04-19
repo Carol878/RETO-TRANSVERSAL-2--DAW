@@ -1,0 +1,54 @@
+.contenedor-panel-administrador {
+  width: 100%;
+}
+
+.fila-principal-admin {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Diseño de la barra lateral */
+.columna-menu-lateral {
+  width: 250px;
+  background-color: #ffffff;
+  border-right: 1px solid #2d2d4e;
+  padding: 20px;
+}
+
+.titulo-menu-lateral {
+  margin-bottom: 1.5rem;
+  color: #2d2d4e;
+}
+
+.navegacion-vertical-admin {
+  display: flex;
+  flex-direction: column;
+}
+
+.enlace-lateral {
+  color: #2d2d4e;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  transition: all 0.2s ease;
+}
+
+.enlace-lateral:hover {
+  background-color: rgba(124, 58, 237, 0.1);
+  color: #7b2cbf;
+}
+
+/* Clase para el menú seleccionado */
+.enlace-activo {
+  background-color: #7b2cbf !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+/* Espacio donde va la tabla de eventos/usuarios */
+.columna-contenido-principal {
+  flex: 1; /* Ocupa todo el espacio restante */
+  padding: 2rem;
+  background-color: #f8f9fa; /* Un fondo gris muy clarito para que resalten las tablas */
+}

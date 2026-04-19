@@ -1,1 +1,21 @@
-<p>adminpanel-component works!</p>
+<div class="contenedor-panel-administrador">
+  <div class="fila-principal-admin">
+
+    <aside class="columna-menu-lateral">
+      <h5 class="titulo-menu-lateral"><strong>Administrador</strong></h5>
+
+      <nav class="navegacion-vertical-admin">
+        <a class="enlace-lateral" routerLink="/admin/eventos" routerLinkActive="enlace-activo">Eventos</a>
+        <a class="enlace-lateral" routerLink="/admin/usuarios" routerLinkActive="enlace-activo">Usuarios</a>
+        <a class="enlace-lateral" routerLink="/admin/perfiles" routerLinkActive="enlace-activo">Perfiles</a>
+        <a class="enlace-lateral" routerLink="/admin/tipoevento" routerLinkActive="enlace-activo">Tipo Evento</a>
+      </nav>
+    </aside>
+
+    <main class="columna-contenido-principal">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+</div>
+
