@@ -55,6 +55,12 @@ public class JwtService {
         // Puedes agregar información adicional: roles, grupo, etc.
         // Por ejemplo:
         // claims.put("grupo", ((Usuario) userDetails).getGrupo().getIdGrupo());
+        // Añado rol en el token
+        // Añadir roles al token
+        claims.put("authorities", userDetails.getAuthorities()
+                .stream()
+                .map(a -> a.getAuthority())
+                .toList());
         return createToken(claims, userDetails.getUsername());
     }
 
