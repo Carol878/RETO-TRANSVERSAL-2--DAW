@@ -39,7 +39,7 @@ jobs:
     # RENOMBRAR JAR
     - name: Renombrar jar
       run: |
-        mv AplicacionBack/target/*.jar AplicacionBack/app.jar
+        mv target/*.jar app.jar
 
     # CONFIGURAR SSH
     - name: Configurar SSH
@@ -57,7 +57,7 @@ jobs:
     # COPIAR BACKEND
     - name: Subir backend
       run: |
-        scp AplicacionBack/app.jar ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:~/proyecto/backend/
+        scp AplicacionBack/AplicacionBack/app.jar ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:~/proyecto/backend/
 
     # EJECUTAR DEPLOY
     - name: Ejecutar deploy
