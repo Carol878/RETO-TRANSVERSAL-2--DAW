@@ -1,1 +1,41 @@
-<p>misreservas-component works!</p>
+<div class="contenedor-mis-reservas">
+  <header class="cabecera-reservas">
+    <h2 class="titulo-reservas-morado">Mis Entradas</h2>
+    <p class="subtitulo-reservas">Aquí tienes tus próximos eventos confirmados</p>
+  </header>
+
+  <div class="rejilla-reservas">
+    @for (reserva of listaReservas; track reserva.id) {
+    <article class="tarjeta-reserva-estilizada">
+      <div class="cuerpo-reserva">
+        <div class="info-evento">
+          <span class="etiqueta-fecha">{{ reserva.fecha }}</span>
+          <h3 class="nombre-concierto">{{ reserva.evento }}</h3>
+          <p class="ubicacion-texto"> {{ reserva.lugar }}</p>
+        </div>
+
+        <div class="detalles-compra">
+          <div class="dato-compra">
+            <span class="mini-titulo">Entradas</span>
+            <span class="valor-dato">{{ reserva.cantidad }}</span>
+          </div>
+          <div class="dato-compra">
+            <span class="mini-titulo">Total</span>
+            <span class="valor-dato precio">{{ reserva.total }}€</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pie-tarjeta-acciones">
+        <button class="boton-pildora-blanco" (click)="descargarTicket(reserva.id)">Descargar PDF</button>
+        <button class="boton-pildora-rojo-suave" (click)="cancelarReserva(reserva.id)">Cancelar</button>
+      </div>
+    </article>
+    } @empty {
+    <div class="aviso-sin-reservas">
+      <p>Aún no tienes ninguna reserva. ¡Explora los conciertos!</p>
+      <button class="boton-pildora-morada" routerLink="/concerts">Ver Conciertos</button>
+    </div>
+    }
+  </div>
+</div>
