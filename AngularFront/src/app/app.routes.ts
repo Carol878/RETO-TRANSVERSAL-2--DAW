@@ -13,11 +13,13 @@ import { GestioneventosComponent } from './admin/gestioneventos-component/gestio
 import { GestionusuariosComponent } from './admin/gestionusuarios-component/gestionusuarios-component';
 import { GestionperfilesComponent } from './admin/gestionperfiles-component/gestionperfiles-component';
 import { GestiontipoeventoComponent } from './admin/gestiontipoevento-component/gestiontipoevento-component';
+import { RegisterComponent } from './pages/register-component/register-component';
 
 export const routes: Routes = [
   // RUTAS PÚBLICAS Y DE USUARIO
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'registro', component: RegisterComponent },
   { path: 'concerts', component: ConciertosComponent },
   { path: 'misreservas', component: MisreservasComponent },
   { path: 'detalles/:id', component: EventodetalleComponent }, // Ruta con ID dinámico

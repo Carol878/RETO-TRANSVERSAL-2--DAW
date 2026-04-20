@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   // Solo lo usamos para saber si pintamos "Iniciar" o "Cerrar" sesión
   estaLogueado(): boolean {
