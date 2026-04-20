@@ -1,0 +1,69 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v3
+
+    # FRONTEND
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Build frontend
+      run: |
+        cd AngularFront
+        npm install
+        npm run build -- --configuration production
+
+    # BACKEND
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+
+    - name: Build backend
+      run: |
+        cd AplicacionBack
+        mvn -B clean package
+
+    # RENOMBRAR JAR
+    - name: Renombrar jar
+      run: |
+        mv AplicacioBack/target/*.jar AplicacionBack/app.jar
+
+    # CONFIGURAR SSH
+    - name: Configurar SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+
+    # COPIAR FRONTEND
+    - name: Subir frontend
+      run: |
+        scp -r AngularFront/dist/* ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:~/proyecto/frontend/
+
+    # COPIAR BACKEND
+    - name: Subir backend
+      run: |
+        scp AplicacionBack/app.jar ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:~/proyecto/backend/
+
+    # EJECUTAR DEPLOY
+    - name: Ejecutar deploy
+      run: |
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+          cd ~/proyecto &&
+          chmod +x scripts/deploy.sh &&
+          ./scripts/deploy.sh
+        "
