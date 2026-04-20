@@ -33,13 +33,13 @@ jobs:
 
     - name: Build backend
       run: |
-        cd AplicacionBack
+        cd AplicacionBack/AplicacionBack
         mvn -B clean package
 
     # RENOMBRAR JAR
     - name: Renombrar jar
       run: |
-        mv AplicacioBack/target/*.jar AplicacionBack/app.jar
+        mv AplicacionBack/target/*.jar AplicacionBack/app.jar
 
     # CONFIGURAR SSH
     - name: Configurar SSH
