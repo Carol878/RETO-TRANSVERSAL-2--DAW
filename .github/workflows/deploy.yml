@@ -38,6 +38,7 @@ jobs:
 
     # RENOMBRAR JAR
     - name: Renombrar jar
+      working-directory: AplicacionBack/AplicacionBack
       run: |
         mv target/*.jar app.jar
 
