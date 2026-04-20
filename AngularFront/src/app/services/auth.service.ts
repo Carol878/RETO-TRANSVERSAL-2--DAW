@@ -12,8 +12,8 @@ private apiUrl = 'http://localhost:9000/';
   constructor(private http: HttpClient, private router: Router) {}
 
   //Login
-  login(email: string, password: string) {
-    return this.http.post<{ token: string }>(`${this.apiUrl}usuarios/login`, {email, password});
+  login(username: string, password: string) {
+    return this.http.post<{ token: string }>(`${this.apiUrl}usuarios/login`, {username, password});
   }
 
   //Registro
