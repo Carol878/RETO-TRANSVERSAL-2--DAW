@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { EventoService } from '../../services/evento.service';
 import { AuthService } from '../../services/auth.service';
 import { Evento } from '../../models/evento.model';
@@ -8,14 +9,15 @@ import { ReservaService } from '../../services/reserva.service';
 @Component({
   selector: 'app-eventodetalle-component',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   templateUrl: './eventodetalle-component.html',
   styleUrl: './eventodetalle-component.css'
 })
 
 export class EventodetalleComponent implements OnInit {
 
-  evento: Evento | null = null;
+  evento: any;
+  cantidadSeleccionada: number = 1;
 
     constructor(
       private route: ActivatedRoute,
@@ -42,29 +44,40 @@ export class EventodetalleComponent implements OnInit {
           }
         }
 
-  procesarReserva(): void {
-      // 1. Comprobamos si el usuario tiene sesión iniciada
-      if (!this.authService.isLoggedIn()) {
-        alert("Debes iniciar sesión para poder reservar una entrada.");
-        this.router.navigate(['/login']);
-        return;
-      }
-      // 2. Ejecutamos la reserva
-      if (this.evento && this.evento.idEvento) {
-          console.log("Enviando reserva al backend...");
+  reservar(): void {
+    if (!this.evento || !this.evento.idEvento) {
+          alert('Aún estamos cargando los datos del evento, inténtalo en un segundo.');
+          return;
+        }
 
-      // 2. Llamamos al cartero y le pasamos el ID del evento
-          this.reservaService.crearReserva(this.evento.idEvento).subscribe({
+        const token = this.authService.getToken();
+          if (!token) {
+            alert('Debes iniciar sesión para reservar.');
+            return;
+          }
+
+          // Extraer usuario del token
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          const usernameActual = payload.sub || payload.username;
+
+          // 2. Calculamos el precio total
+          const precioTotal = (this.evento.precio || 0) * this.cantidadSeleccionada;
+
+          // 3. Enviamos los datos reales al servicio
+          this.reservaService.crearReserva(
+            this.evento.idEvento,
+            this.cantidadSeleccionada,
+            usernameActual,
+            precioTotal
+          ).subscribe({
             next: (respuesta) => {
-              console.log("¡Reserva confirmada por el servidor!", respuesta);
-              alert("¡Entrada reservada con éxito!");
-              this.router.navigate(['/misreservas']);
+              alert(`¡Reserva confirmada por ${this.cantidadSeleccionada} entradas! Total: ${precioTotal}€`);
             },
-            error: (err) => {
-            console.error("Error al intentar reservar:", err);
-            alert("Hubo un problema al procesar tu reserva. Inténtalo de nuevo.");
+            error: (error) => {
+              console.error('Error al reservar:', error);
+              alert('Hubo un error al procesar tu reserva.');
             }
-                  });
-                }
-              }
-            }
+          });
+        }
+    }
+
