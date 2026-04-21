@@ -60,8 +60,12 @@ public class ReservaRestController {
 	
 	@PostMapping("/clientes/reservar")
 	ResponseEntity<?> reservar(@RequestBody ReservaDto reservaDto){
-		return ResponseEntity.ok(null);
+	    // AHORA: Llama al servicio real para guardarlo en la BBDD
+	    return ResponseEntity.ok(ReservaSalidaDto.crearReservaSalidaDtoDesdeReserva(reservaService.insertFromDto(reservaDto)));
 	}
+	/*ResponseEntity<?> reservar(@RequestBody ReservaDto reservaDto){
+		return ResponseEntity.ok(null);
+	}*/
 	
 	@GetMapping("/clientes/misReservas/{username}")
 	ResponseEntity<?> buscarReservasDeUnCliente(@PathVariable String username){
@@ -73,8 +77,11 @@ public class ReservaRestController {
 	}
 	
 	@DeleteMapping("/clientes/cancelarReserva/{id}")
-	ResponseEntity<?> cancelarReserva(@PathVariable int idReserva){
+	ResponseEntity<?> cancelarReserva(@PathVariable("id") int idReserva){
+	    return ResponseEntity.ok(reservaService.deleteById(idReserva));
+	/*ResponseEntity<?> cancelarReserva(@PathVariable int idReserva){
 		return ResponseEntity.ok(reservaService.deleteById(idReserva));
+	}*/
 	}
 	
 }
