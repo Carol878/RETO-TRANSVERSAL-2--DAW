@@ -16,11 +16,28 @@ export class EventoService {
   }
 
   getEvento(id: number): Observable<Evento> {
-    return this.http.get<Evento>(`${this.apiUrl}${id}`);
+    return this.http.get<Evento>(`${this.apiUrl}/${id}`);
   }
 
   findById(id: number): Observable<Evento> {
     // Apuntamos directamente a /eventos/id (o a /eventos/detalle/id si lo pusiste así en tu Java)
      return this.http.get<Evento>(`http://localhost:9000/eventos/${id}`);
   }
+
+  crearEvento(evento: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}`, evento);
+  }
+
+  borrarEvento(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  cancelarEvento(id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/cancelar/${id}`, {});
+  }
+
+  actualizarEvento(evento: Evento): Observable<any> {
+  return this.http.put(`${this.apiUrl}/${evento.idEvento}`, evento);
+}
+
 }

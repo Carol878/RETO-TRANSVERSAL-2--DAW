@@ -1,32 +1,151 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { EventoService } from '../../services/evento.service';
+import { Evento } from '../../models/evento.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-gestioneventos-component',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './gestioneventos-component.html',
   styleUrl: './gestioneventos-component.css'
 })
-export class GestioneventosComponent {
+export class GestioneventosComponent implements OnInit{
 
-  // Datos de ejemplo basados en tu HTML original
-  listaEventos = [
-    { idEvento: 1, nombre: 'Festival Rock', aforoMaximo: 5000, fechaInicio: '2026-06-15', precio: 50, estado: 'Activo' },
-    { idEvento: 2, nombre: 'Noche de Jazz', aforoMaximo: 1500, fechaInicio: '2026-06-22', precio: 35, estado: 'Destacado' }
-  ];
+ listaEventos: Evento[] = [];
+ modoEdicion = false; // false = crear, true = editar
+ eventoEditando: Evento | null = null
+ 
 
-  nuevoEvento = { nombre: '', fechaInicio: '', ubicacion: '', aforo: 0, descripcion: '' };
+  nuevoEvento = {
+    nombre: '',
+    descripcion: '',
+    fechaInicio: '',
+    duracion: 0,
+    direccion: '',
+    destacado: 'NO',
+    aforoMaximo: 0,
+    minimoAsistencia: 0,
+    precio: 0,
+    tipo: {
+      idTipo: 1,
+      nombre: '',
+      descripcion: ''
+    }
+  };
 
-  crearEvento() {
-    console.log('Guardando:', this.nuevoEvento);
-    // Aquí irá la llamada al servicio más adelante
+  constructor(private eventoService: EventoService) {}
+
+  ngOnInit(): void {
+    console.log("ejecuta onInit");
+    this.cargarEventos();
+  }
+
+  cargarEventos() {
+    console.log("LLAMANDO AL SERVICIO...");
+    this.eventoService.getEventos().subscribe({
+      next: (data) => {console.log("DATOS RECIBIDOS:", data); this.listaEventos = data},
+      error: (err) => console.error('Error cargando eventos:', err)
+    });
+  }
+
+  /*crearEvento() {
+    this.eventoService.crearEvento(this.nuevoEvento).subscribe({
+      next: () => {
+        this.cargarEventos();
+        this.resetFormulario();
+      },
+      error: (err) => console.error('Error creando evento:', err)
+    });
+  }*/
+
+  resetFormulario() {
+    this.nuevoEvento = {
+      nombre: '',
+      descripcion: '',
+      fechaInicio: '',
+      duracion: 0,
+      direccion: '',
+      destacado: 'NO',
+      aforoMaximo: 0,
+      minimoAsistencia: 0,
+      precio: 0,
+      tipo: {
+        idTipo: 1,
+        nombre: '',
+        descripcion: ''
+      }
+    };
   }
 
   borrar(id: number) {
-    this.listaEventos = this.listaEventos.filter(e => e.idEvento !== id);
+    this.eventoService.borrarEvento(id).subscribe({
+      next: () => this.cargarEventos(),
+      error: (err) => console.error('Error borrando evento:', err)
+    });
   }
 
-  editar(id: number) { console.log('Editando evento:', id); }
-  cancelar(id: number) { console.log('Cancelando evento:', id); }
+  cancelar(id: number) {
+    this.eventoService.cancelarEvento(id).subscribe({
+      next: () => this.cargarEventos(),
+      error: (err) => console.error('Error cancelando evento:', err)
+    });
+  }
+
+  editar(id: number) {
+    this.eventoService.getEvento(id).subscribe({
+    next: (evento) => {
+      this.eventoEditando = evento;
+      this.modoEdicion = true;
+
+      // Rellenar el formulario con los datos del evento
+      this.nuevoEvento = {
+        nombre: evento.nombre,
+        descripcion: evento.descripcion,
+        fechaInicio: evento.fechaInicio,
+        duracion: evento.duracion,
+        direccion: evento.direccion,
+        destacado: evento.destacado,
+        aforoMaximo: evento.aforoMaximo,
+        minimoAsistencia: evento.minimoAsistencia,
+        precio: evento.precio,
+        tipo: evento.tipo
+      };
+    }
+  });
+  }
+
+  guardar() {
+  if (this.modoEdicion && this.eventoEditando) {
+    // ACTUALIZAR
+    const eventoActualizado = {
+      ...this.eventoEditando,
+      ...this.nuevoEvento
+    };
+
+    this.eventoService.actualizarEvento(eventoActualizado).subscribe({
+      next: () => {
+        this.cargarEventos();
+        this.modoEdicion = false;   // ← vuelve a modo crear automáticamente
+        this.eventoEditando = null;
+        this.resetFormulario();
+      },
+      error: (err) => console.error('Error actualizando evento:', err)
+    });
+
+  } else {
+    // CREAR
+    this.eventoService.crearEvento(this.nuevoEvento).subscribe({
+      next: () => {
+        this.cargarEventos();
+        this.resetFormulario();
+      },
+      error: (err) => console.error('Error creando evento:', err)
+    });
+  }
+}
+
+
+
 }
