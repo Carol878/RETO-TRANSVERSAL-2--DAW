@@ -10,4 +10,6 @@ import { FooterComponent } from './components/footer-component/footer-component'
   imports: [RouterOutlet, NavbarComponent, FooterComponent],
   templateUrl: './app.html' // <-- Apuntamos al HTML que acabamos de arreglar
 })
-export class App { }
+export class AppComponent {
+  title = 'AngularFront';
+}
