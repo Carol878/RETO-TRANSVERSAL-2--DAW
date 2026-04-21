@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { jwtDecode} from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +52,13 @@ private apiUrl = 'http://localhost:9000/';
   }
 
   isAdmin(): boolean {
-    return this.getRole() === 'ADMIN';
+    const token = this.getToken();
+    if (!token) return false;
+
+    const decoded: any = jwtDecode(token);
+
+    // Ajusta según cómo venga tu token
+    return decoded.authorities?.includes('ROLE_ADMON');
   }
 
 }

@@ -29,31 +29,31 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
-            .cors(Customizer.withDefaults())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                        "/login",
-                        "/swagger-ui/**",
-                        "/swagger-ui.html",
-                        "/v3/api-docs/**",
-                        "/v3/api-docs",
-                        "/swagger-resources/**",
-                        "/webjars/**",
-                        "/usuarios/login",
-                        "/usuarios/registro",
-                        "/eventos/"
-                    ).permitAll()
-                .requestMatchers(HttpMethod.GET, "/eventos/{id}").permitAll()
-                // Endpoints solo para ROLE_ADMON
-                .requestMatchers("/usuarios/**","/perfiles/**","/tipos/**","/eventos/**","/reservas/**").hasRole("ADMON")
-                // Endpoints solo para ROLE_CLIENTE
-                .requestMatchers("/eventos/clientes/**","/reservas/clientes/**").hasRole("CLIENTE")
-                .anyRequest().authenticated()
-            )
-            // Eliminamos .httpBasic() y agregamos el filtro JWT
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .csrf(csrf -> csrf.disable())
+                .cors(Customizer.withDefaults())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/login",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**",
+                                "/v3/api-docs",
+                                "/swagger-resources/**",
+                                "/webjars/**",
+                                "/usuarios/login",
+                                "/usuarios/registro",
+                                "/eventos/")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/eventos/{id}").permitAll()
+                        // Endpoints solo para ROLE_ADMON
+                        .requestMatchers("/usuarios/**", "/perfiles/**", "/tipos/**", "/eventos/**", "/reservas/**")
+                        .hasRole("ADMON")
+                        // Endpoints solo para ROLE_CLIENTE
+                        .requestMatchers("/eventos/clientes/**", "/reservas/clientes/**").hasRole("CLIENTE")
+                        .anyRequest().authenticated())
+                // Eliminamos .httpBasic() y agregamos el filtro JWT
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -70,6 +70,7 @@ public class SecurityConfig {
             public String encode(CharSequence rawPassword) {
                 return "{noop}" + rawPassword; // Solo para pruebas
             }
+
             @Override
             public boolean matches(CharSequence rawPassword, String encodedPassword) {
                 if (encodedPassword.startsWith("{noop}")) {
@@ -80,6 +81,7 @@ public class SecurityConfig {
             }
         };
     }
+
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -89,7 +91,7 @@ public class SecurityConfig {
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         // Permitimos las cabeceras de seguridad
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-        
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

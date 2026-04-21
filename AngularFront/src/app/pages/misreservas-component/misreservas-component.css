@@ -1,0 +1,97 @@
+.contenedor-mis-reservas {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.titulo-reservas-morado {
+  color: #7b2cbf;
+  font-weight: 850;
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+}
+
+.subtitulo-reservas {
+  color: #666;
+  margin-bottom: 40px;
+}
+
+/* Rejilla de tarjetas */
+.rejilla-reservas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+/* Tarjeta Estilizada */
+.tarjeta-reserva-estilizada {
+  background: white;
+  border: 2px solid #7b2cbf; /* Borde morado marca de la casa */
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  box-shadow: 0 10px 20px rgba(123, 44, 191, 0.1);
+}
+
+.tarjeta-reserva-estilizada:hover {
+  transform: translateY(-5px);
+}
+
+.cuerpo-reserva {
+  padding: 25px;
+  flex-grow: 1;
+}
+
+.etiqueta-fecha {
+  background: #f3e8ff;
+  color: #7b2cbf;
+  padding: 5px 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.nombre-concierto {
+  margin: 15px 0 5px 0;
+  font-weight: 800;
+  color: #2d2d4e;
+}
+
+.detalles-compra {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px dashed #7b2cbf;
+}
+
+/* Botones Píldora */
+.pie-tarjeta-acciones {
+  background: #f8f9fa;
+  padding: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.boton-pildora-blanco {
+  background: white;
+  border: 2px solid #7b2cbf;
+  color: #7b2cbf;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.boton-pildora-rojo-suave {
+  background: #fff0f0;
+  border: 2px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+}
