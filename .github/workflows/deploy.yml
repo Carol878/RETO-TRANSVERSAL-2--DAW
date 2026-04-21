@@ -64,6 +64,7 @@ jobs:
     - name: Ejecutar deploy
       run: |
         ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+          export MYSQL_ROOT_PASSWORD='${{ secrets.MYSQL_ROOT_PASSWORD }}'
           cd ~/proyecto &&
           chmod +x scripts/deploy.sh &&
           ./scripts/deploy.sh
