@@ -1,4 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
-.navbar, .btn, .footer {
-  background: linear-gradient(180deg, #4d0f88, #935add);
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Configura el contenedor raíz de Angular como un Flexbox vertical */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Esta clase hace que el contenido ocupe todo el espacio sobrante */
+.contenido-principal {
+  flex: 1 0 auto;
+}
+
+/* El footer se mantiene al final sin encogerse */
+app-footer-component {
+  flex-shrink: 0;
 }
