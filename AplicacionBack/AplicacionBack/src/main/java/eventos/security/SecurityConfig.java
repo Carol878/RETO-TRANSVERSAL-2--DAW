@@ -101,7 +101,7 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // Damos permiso explícito a tu Angular
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:9000/eventos/"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:9000/eventos/", "http://antdaw25.com:4200"));
         // Permitimos todos los métodos
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         // Permitimos las cabeceras de seguridad
