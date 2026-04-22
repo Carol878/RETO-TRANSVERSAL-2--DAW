@@ -51,6 +51,7 @@ public class SecurityConfig {
                         .requestMatchers("/eventos/clientes/**", "/reservas/clientes/**").hasAnyRole("CLIENTE", "ADMON")
 
                         // 2º PONEMOS DEBAJO LAS RUTAS GENERALES DE ADMIN
+
                         .requestMatchers("/usuarios/**", "/perfiles/**", "/tipos/**", "/eventos/**", "/reservas/**")
                         .hasRole("ADMON")
 

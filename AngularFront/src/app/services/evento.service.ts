@@ -7,12 +7,12 @@ import { Evento } from '../models/evento.model';
   providedIn: 'root'
 })
 export class EventoService {
-  private apiUrl = 'http://localhost:9000/eventos/';
+  private apiUrl = 'http://localhost:9000/eventos';
 
   constructor(private http: HttpClient) { }
 
   getEventos(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(this.apiUrl);
+    return this.http.get<Evento[]>(`${this.apiUrl}/`);
   }
 
   getEvento(id: number): Observable<Evento> {
@@ -25,7 +25,7 @@ export class EventoService {
   }
 
   crearEvento(evento: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}`, evento);
+    return this.http.post(`${this.apiUrl}/`, evento);
   }
 
   borrarEvento(id: number): Observable<any> {
@@ -37,7 +37,7 @@ export class EventoService {
   }
 
   actualizarEvento(evento: Evento): Observable<any> {
-  return this.http.put(`${this.apiUrl}/${evento.idEvento}`, evento);
-}
+  return this.http.put(`${this.apiUrl}/`, evento);
+  }
 
 }

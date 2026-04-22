@@ -82,14 +82,14 @@ export class GestioneventosComponent implements OnInit{
 
   borrar(id: number) {
     this.eventoService.borrarEvento(id).subscribe({
-      next: () => this.cargarEventos(),
+      next: () => {this.cargarEventos(),this.cdr.detectChanges()},
       error: (err) => console.error('Error borrando evento:', err)
     });
   }
 
   cancelar(id: number) {
     this.eventoService.cancelarEvento(id).subscribe({
-      next: () => this.cargarEventos(),
+      next: () => {this.cargarEventos(),this.cdr.detectChanges()},
       error: (err) => console.error('Error cancelando evento:', err)
     });
   }
@@ -113,6 +113,7 @@ export class GestioneventosComponent implements OnInit{
         precio: evento.precio,
         tipo: evento.tipo
       };
+       this.cdr.detectChanges();
     }
   });
   }
@@ -131,21 +132,23 @@ export class GestioneventosComponent implements OnInit{
         this.modoEdicion = false;   // ← vuelve a modo crear automáticamente
         this.eventoEditando = null;
         this.resetFormulario();
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error actualizando evento:', err)
     });
 
-  } else {
-    // CREAR
-    this.eventoService.crearEvento(this.nuevoEvento).subscribe({
-      next: () => {
-        this.cargarEventos();
-        this.resetFormulario();
-      },
-      error: (err) => console.error('Error creando evento:', err)
-    });
+    } else {
+      // CREAR
+      this.eventoService.crearEvento(this.nuevoEvento).subscribe({
+        next: () => {
+          this.cargarEventos();
+          this.resetFormulario();
+          this.cdr.detectChanges();
+        },
+        error: (err) => console.error('Error creando evento:', err)
+      });
+    }
   }
-}
 
 
 
