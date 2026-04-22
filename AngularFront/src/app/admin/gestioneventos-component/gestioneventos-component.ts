@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { EventoService } from '../../services/evento.service';
 import { Evento } from '../../models/evento.model';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-gestioneventos-component',
@@ -35,7 +36,7 @@ export class GestioneventosComponent implements OnInit{
     }
   };
 
-  constructor(private eventoService: EventoService) {}
+  constructor(private eventoService: EventoService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     console.log("ejecuta onInit");
@@ -45,7 +46,7 @@ export class GestioneventosComponent implements OnInit{
   cargarEventos() {
     console.log("LLAMANDO AL SERVICIO...");
     this.eventoService.getEventos().subscribe({
-      next: (data) => {console.log("DATOS RECIBIDOS:", data); this.listaEventos = data},
+      next: (data) => {console.log("DATOS RECIBIDOS:", data); this.listaEventos = data;  this.cdr.detectChanges(); },
       error: (err) => console.error('Error cargando eventos:', err)
     });
   }
