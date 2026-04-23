@@ -29,11 +29,7 @@ export class GestioneventosComponent implements OnInit{
     aforoMaximo: 0,
     minimoAsistencia: 0,
     precio: 0,
-    tipo: {
-      idTipo: 1,
-      nombre: '',
-      descripcion: ''
-    }
+    idTipo: 1
   };
 
   constructor(private eventoService: EventoService, private cdr: ChangeDetectorRef) {}
@@ -68,15 +64,11 @@ export class GestioneventosComponent implements OnInit{
       fechaInicio: '',
       duracion: 0,
       direccion: '',
-      destacado: 'NO',
+      destacado: 'N',
       aforoMaximo: 0,
       minimoAsistencia: 0,
       precio: 0,
-      tipo: {
-        idTipo: 1,
-        nombre: '',
-        descripcion: ''
-      }
+      idTipo: 1
     };
   }
 
@@ -111,7 +103,7 @@ export class GestioneventosComponent implements OnInit{
         aforoMaximo: evento.aforoMaximo,
         minimoAsistencia: evento.minimoAsistencia,
         precio: evento.precio,
-        tipo: evento.tipo
+        idTipo: evento.tipo.idTipo
       };
        this.cdr.detectChanges();
     }

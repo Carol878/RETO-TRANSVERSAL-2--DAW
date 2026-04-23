@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class EventoService {
-  private apiUrl = `${environment.apiUrl}/eventos/`;
+  private apiUrl = `http://localhost:9000/eventos/`;
 
   constructor(private http: HttpClient) { }
 
