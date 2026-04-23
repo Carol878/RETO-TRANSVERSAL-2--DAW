@@ -34,7 +34,7 @@ export class EventoService {
   }
 
   cancelarEvento(id: number): Observable<any> {
-    return this.http.put(`${this.apiUrl}/cancelar/${id}`, {});
+    return this.http.put(`${this.apiUrl}cancelar/${id}`, {});
   }
 
   actualizarEvento(evento: Evento): Observable<any> {

@@ -19,88 +19,101 @@ import eventos.model.dto.ReservaSalidaDto;
 import eventos.model.entities.Evento;
 import eventos.service.EventoService;
 
-
 @RestController
 @RequestMapping("/eventos")
 public class EventoRestController {
 
 	@Autowired
 	public EventoService eventoService;
-	
+
 	@GetMapping("/")
-	ResponseEntity<?> buscarTodos(){
+	ResponseEntity<?> buscarTodos() {
 		List<EventoSalidaDto> listaEventosDto = eventoService.findAll()
-			    .stream()
-			    .map(evento -> EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,eventoService.calcularPlazasDisponibles(evento)))
-			    .toList();
+				.stream()
+				.map(evento -> EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,
+						eventoService.calcularPlazasDisponibles(evento)))
+				.toList();
 		return ResponseEntity.ok(listaEventosDto);
 	}
-	
+
 	@GetMapping("/{id}")
-	ResponseEntity<?> buscarUno(@PathVariable int id){
+	ResponseEntity<?> buscarUno(@PathVariable int id) {
 		Evento evento = eventoService.findById(id);
-		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,eventoService.calcularPlazasDisponibles(evento)));
+		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,
+				eventoService.calcularPlazasDisponibles(evento)));
 	}
-	
+
 	@PostMapping("/")
-	ResponseEntity<?> insertarUno(@RequestBody EventoDto evento){
+	ResponseEntity<?> insertarUno(@RequestBody EventoDto evento) {
 		Evento eventoNuevo = eventoService.insertFromDto(evento);
-		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(eventoNuevo,eventoService.calcularPlazasDisponibles(eventoNuevo)));
+		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(eventoNuevo,
+				eventoService.calcularPlazasDisponibles(eventoNuevo)));
 	}
+
 	@PutMapping("/")
-	ResponseEntity<?> actualizarUno(@RequestBody EventoDto evento){
+	ResponseEntity<?> actualizarUno(@RequestBody EventoDto evento) {
 		Evento eventoNuevo = eventoService.updateFromDto(evento);
-		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(eventoNuevo,eventoService.calcularPlazasDisponibles(eventoNuevo)));
+		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(eventoNuevo,
+				eventoService.calcularPlazasDisponibles(eventoNuevo)));
 	}
+
 	@DeleteMapping("/{id}")
-	ResponseEntity<?> eliminarUno(@PathVariable int id){
+	ResponseEntity<?> eliminarUno(@PathVariable int id) {
 		return ResponseEntity.ok(eventoService.deleteById(id));
 	}
-	
+
 	@PutMapping("/cancelar/{id}")
-	ResponseEntity<?> cancelarUno(@RequestBody int idEvento){
+	ResponseEntity<?> cancelarUno(@PathVariable("id") int idEvento) {
 		Evento eventoNuevo = eventoService.cancelOne(idEvento);
-		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(eventoNuevo,eventoService.calcularPlazasDisponibles(eventoNuevo)));
+		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(eventoNuevo,
+				eventoService.calcularPlazasDisponibles(eventoNuevo)));
 	}
-	
+
 	@GetMapping("/clientes/activos")
-	ResponseEntity<?> buscarActivos(){
+	ResponseEntity<?> buscarActivos() {
 		List<EventoSalidaDto> listaEventosDto = eventoService.buscarActivos()
-			    .stream()
-			    .map(evento -> EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,eventoService.calcularPlazasDisponibles(evento)))
-			    .toList();
+				.stream()
+				.map(evento -> EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,
+						eventoService.calcularPlazasDisponibles(evento)))
+				.toList();
 		return ResponseEntity.ok(listaEventosDto);
 	}
+
 	@GetMapping("/clientes/destacados")
-	ResponseEntity<?> buscarDestacados(){
+	ResponseEntity<?> buscarDestacados() {
 		List<EventoSalidaDto> listaEventosDto = eventoService.buscarDestacados()
-			    .stream()
-			    .map(evento -> EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,eventoService.calcularPlazasDisponibles(evento)))
-			    .toList();
+				.stream()
+				.map(evento -> EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,
+						eventoService.calcularPlazasDisponibles(evento)))
+				.toList();
 		return ResponseEntity.ok(listaEventosDto);
 	}
+
 	@GetMapping("/clientes/terminados")
-	ResponseEntity<?> buscarTerminados(){
+	ResponseEntity<?> buscarTerminados() {
 		List<EventoSalidaDto> listaEventosDto = eventoService.buscarTerminados()
-			    .stream()
-			    .map(evento -> EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,eventoService.calcularPlazasDisponibles(evento)))
-			    .toList();
+				.stream()
+				.map(evento -> EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,
+						eventoService.calcularPlazasDisponibles(evento)))
+				.toList();
 		return ResponseEntity.ok(listaEventosDto);
 	}
+
 	@GetMapping("/clientes/cancelados")
-	ResponseEntity<?> buscarCancelados(){
+	ResponseEntity<?> buscarCancelados() {
 		List<EventoSalidaDto> listaEventosDto = eventoService.buscarCancelados()
-			    .stream()
-			    .map(evento -> EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,eventoService.calcularPlazasDisponibles(evento)))
-			    .toList();
+				.stream()
+				.map(evento -> EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,
+						eventoService.calcularPlazasDisponibles(evento)))
+				.toList();
 		return ResponseEntity.ok(listaEventosDto);
 	}
+
 	@GetMapping("/clientes/{id}")
-	ResponseEntity<?> buscarUnoClientes(@PathVariable int id){
+	ResponseEntity<?> buscarUnoClientes(@PathVariable int id) {
 		Evento evento = eventoService.findById(id);
-		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,eventoService.calcularPlazasDisponibles(evento)));
+		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(evento,
+				eventoService.calcularPlazasDisponibles(evento)));
 	}
-	
-	
-	
+
 }
