@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String username;
 
         // 1. Si la ruta es /login, no procesamos JWT y dejamos pasar
-        if (request.getRequestURI().equals("/login")) {
+        if (request.getRequestURI().contains("/login")) {
             filterChain.doFilter(request, response);
             return;
         }
