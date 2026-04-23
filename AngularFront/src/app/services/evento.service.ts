@@ -8,16 +8,16 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class EventoService {
-  private apiUrl = `${environment.apiUrl}/eventos`;
+  private apiUrl = `${environment.apiUrl}/eventos/`;
 
   constructor(private http: HttpClient) { }
 
   getEventos(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(`${this.apiUrl}/`);
+    return this.http.get<Evento[]>(`${this.apiUrl}`);
   }
 
   getEvento(id: number): Observable<Evento> {
-    return this.http.get<Evento>(`${this.apiUrl}/${id}`);
+    return this.http.get<Evento>(`${this.apiUrl}${id}`);
   }
 
   findById(id: number): Observable<Evento> {
@@ -26,11 +26,11 @@ export class EventoService {
   }
 
   crearEvento(evento: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/`, evento);
+    return this.http.post(`${this.apiUrl}`, evento);
   }
 
   borrarEvento(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}${id}`);
   }
 
   cancelarEvento(id: number): Observable<any> {
@@ -38,7 +38,7 @@ export class EventoService {
   }
 
   actualizarEvento(evento: Evento): Observable<any> {
-  return this.http.put(`${this.apiUrl}/`, evento);
+  return this.http.put(`${this.apiUrl}`, evento);
   }
 
 }

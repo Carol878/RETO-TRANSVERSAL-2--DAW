@@ -6,10 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -26,6 +28,9 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -35,6 +40,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
                         // RUTAS PÚBLICAS
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(
                                 "/login",
                                 "/swagger-ui/**",
@@ -54,8 +60,9 @@ public class SecurityConfig {
                         // RUTAS DE CLIENTE
                         .requestMatchers("/eventos/clientes/**", "/reservas/clientes/**").hasAnyRole("CLIENTE", "ADMON")
 
-                        // RUTAS GENERALES DE ADMIN
-                        .requestMatchers("/usuarios/**", "/perfiles/**", "/tipos/**", "/eventos/**", "/reservas/**")
+                        // RUTAS DE ADMIN
+                        .requestMatchers(HttpMethod.POST, "/eventos/**").hasRole("ADMON")
+                        .requestMatchers("/usuarios/**", "/perfiles/**", "/tipos/**", "/reservas/**")
                         .hasRole("ADMON")
 
                         .anyRequest().authenticated())
@@ -75,10 +82,23 @@ public class SecurityConfig {
 
         return http.build();
     }
+    /*
+     * @Bean
+     * public AuthenticationManager
+     * authenticationManager(AuthenticationConfiguration config) throws Exception {
+     * return config.getAuthenticationManager();
+     * }
+     */
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+
+        authBuilder
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
+
+        return authBuilder.build();
     }
 
     @Bean
