@@ -33,6 +33,8 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+
+                        // RUTAS PÚBLICAS
                         .requestMatchers(
                                 "/login",
                                 "/swagger-ui/**",
@@ -42,16 +44,17 @@ public class SecurityConfig {
                                 "/swagger-resources/**",
                                 "/webjars/**",
                                 "/usuarios/login",
-                                "/usuarios/registro",
-                                "/eventos/")
+                                "/usuarios/registro")
                         .permitAll()
+
+                        // GET públicos de eventos (HOME + ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/eventos/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/eventos/{id}").permitAll()
 
-                        // 1º PONEMOS PRIMERO LAS RUTAS ESPECÍFICAS DE CLIENTES
+                        // RUTAS DE CLIENTE
                         .requestMatchers("/eventos/clientes/**", "/reservas/clientes/**").hasAnyRole("CLIENTE", "ADMON")
 
-                        // 2º PONEMOS DEBAJO LAS RUTAS GENERALES DE ADMIN
-
+                        // RUTAS GENERALES DE ADMIN
                         .requestMatchers("/usuarios/**", "/perfiles/**", "/tipos/**", "/eventos/**", "/reservas/**")
                         .hasRole("ADMON")
 
@@ -101,7 +104,8 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // Damos permiso explícito a tu Angular
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:9000/eventos/", "http://antdaw25.com:4200"));
+        configuration.setAllowedOrigins(
+                Arrays.asList("http://localhost:4200", "http://localhost:9000/eventos/", "http://antdaw25.com:4200"));
         // Permitimos todos los métodos
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         // Permitimos las cabeceras de seguridad
