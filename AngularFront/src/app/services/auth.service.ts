@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { jwtDecode} from 'jwt-decode';
-import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-private apiUrl = `${environment.apiUrl}`;
+private apiUrl = 'http://localhost:9000/';
 
   constructor(private http: HttpClient, private router: Router) {}
 
