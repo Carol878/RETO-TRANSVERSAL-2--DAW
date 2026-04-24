@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import eventos.model.dto.EventoDto;
 import eventos.model.dto.EventoSalidaDto;
 import eventos.model.dto.ReservaSalidaDto;
+import eventos.model.enums.Estado;
 import eventos.model.entities.Evento;
 import eventos.service.EventoService;
 
@@ -26,7 +27,7 @@ public class EventoRestController {
 	@Autowired
 	public EventoService eventoService;
 
-	@GetMapping("/")
+	@GetMapping //("/")
 	ResponseEntity<?> buscarTodos() {
 		List<EventoSalidaDto> listaEventosDto = eventoService.findAll()
 				.stream()
@@ -43,14 +44,14 @@ public class EventoRestController {
 				eventoService.calcularPlazasDisponibles(evento)));
 	}
 
-	@PostMapping("/")
+	@PostMapping //("/")
 	ResponseEntity<?> insertarUno(@RequestBody EventoDto evento) {
 		Evento eventoNuevo = eventoService.insertFromDto(evento);
 		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(eventoNuevo,
 				eventoService.calcularPlazasDisponibles(eventoNuevo)));
 	}
 
-	@PutMapping("/")
+	@PutMapping //("/")
 	ResponseEntity<?> actualizarUno(@RequestBody EventoDto evento) {
 		Evento eventoNuevo = eventoService.updateFromDto(evento);
 		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(eventoNuevo,
@@ -67,6 +68,21 @@ public class EventoRestController {
 		Evento eventoNuevo = eventoService.cancelOne(idEvento);
 		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(eventoNuevo,
 				eventoService.calcularPlazasDisponibles(eventoNuevo)));
+	}
+	
+	@PutMapping("/activar/{id}")
+	ResponseEntity<?> activarUno(@PathVariable("id") int idEvento) {
+		// 1. Buscamos el evento
+		Evento evento = eventoService.findById(idEvento);
+		
+		// 2. Le cambiamos el estado (Asegúrate de tener importado eventos.model.enums.Estado arriba)
+		evento.setEstado(eventos.model.enums.Estado.ACTIVO);
+		
+		// 3. Lo actualizamos en la BBDD
+		Evento eventoActualizado = eventoService.updateOne(evento);
+		
+		return ResponseEntity.ok(EventoSalidaDto.crearEventoSalidaDtoDesdeEvento(eventoActualizado,
+				eventoService.calcularPlazasDisponibles(eventoActualizado)));
 	}
 
 	@GetMapping("/clientes/activos")

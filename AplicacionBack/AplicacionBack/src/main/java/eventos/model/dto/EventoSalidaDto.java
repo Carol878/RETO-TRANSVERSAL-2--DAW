@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import eventos.model.entities.Evento;
 import eventos.model.entities.Tipo;
 import eventos.model.enums.Destacado;
+import eventos.model.enums.Estado;
 import eventos.service.EventoService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,8 @@ public class EventoSalidaDto {
 	private double precio;
 	private Tipo tipo;
 	private int plazasDisponibles;
+	
+	private Estado estado;
 
 	public static EventoSalidaDto crearEventoSalidaDtoDesdeEvento(Evento evento, int plazasDisponibles) {
 		EventoSalidaDto eventoSalidaDto = new EventoSalidaDto();
@@ -45,6 +48,8 @@ public class EventoSalidaDto {
 		eventoSalidaDto.setMinimoAsistencia(evento.getMinimoAsistencia());
 		eventoSalidaDto.setPrecio(evento.getPrecio());
 		eventoSalidaDto.setTipo(evento.getTipo());
+		
+		eventoSalidaDto.setEstado(evento.getEstado());
 
 		eventoSalidaDto.setPlazasDisponibles(evento.getAforoMaximo() - plazasDisponibles);
 

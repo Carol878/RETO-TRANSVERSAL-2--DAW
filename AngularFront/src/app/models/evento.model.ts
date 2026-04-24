@@ -9,8 +9,9 @@ export interface Evento {
     aforoMaximo: number;
     minimoAsistencia: number;
     precio: number;
-    plazasDisponibles: number; // ¡Aquí estaba el error! Faltaba esta línea
-    tipo: {                    // ¡Y faltaba definir el objeto tipo!
+    estado?: string;
+    plazasDisponibles: number; //
+    tipo: {                    //
         idTipo: number;
         nombre: string;
         descripcion: string;

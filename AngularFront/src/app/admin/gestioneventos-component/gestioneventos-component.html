@@ -1,4 +1,176 @@
-<section class="contenedor-gestion-eventos">
+<div class="contenedor-admin">
+  <div class="encabezado-seccion">
+    <h2 class="titulo-admin">Gestión de Eventos</h2>
+  </div>
+
+  <article class="caja-formulario">
+    <h5 class="subtitulo-formulario" style="font-weight: bold; margin-bottom: 15px; color: #5a189a;">
+      {{ modoEdicion ? 'Editar Evento' : 'Crear Nuevo Evento' }}
+    </h5>
+
+    <form (ngSubmit)="guardar()">
+      <div class="grid-campos">
+        <div class="campo">
+          <label class="etiqueta">Nombre del Evento</label>
+          <input type="text" [(ngModel)]="nuevoEvento.nombre" name="nombre" placeholder="Ej: Festival Rock" required>
+        </div>
+
+        <div class="campo">
+          <label class="etiqueta">Descripción</label>
+          <input type="text" [(ngModel)]="nuevoEvento.descripcion" name="descripcion" placeholder="Descripción del evento" required>
+        </div>
+
+        <div class="campo">
+          <label class="etiqueta">Fecha</label>
+          <input type="date" [(ngModel)]="nuevoEvento.fechaInicio" name="fechaInicio" required>
+        </div>
+
+        <div class="campo">
+          <label class="etiqueta">Duración (min)</label>
+          <input type="number" [(ngModel)]="nuevoEvento.duracion" name="duracion" required>
+        </div>
+
+        <div class="campo">
+          <label class="etiqueta">Dirección</label>
+          <input type="text" [(ngModel)]="nuevoEvento.direccion" name="direccion" required>
+        </div>
+
+        <div class="campo">
+          <label class="etiqueta">Destacado</label>
+          <select class="select-rol" [(ngModel)]="nuevoEvento.destacado" name="destacado">
+            <option value="N">No</option>
+            <option value="S">Sí</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label class="etiqueta">Aforo Máximo</label>
+          <input type="number" [(ngModel)]="nuevoEvento.aforoMaximo" name="aforoMaximo" required>
+        </div>
+
+        <div class="campo">
+          <label class="etiqueta">Mínimo Asistencia</label>
+          <input type="number" [(ngModel)]="nuevoEvento.minimoAsistencia" name="minimoAsistencia" required>
+        </div>
+
+        <div class="campo">
+          <label class="etiqueta">Precio (€)</label>
+          <input type="number" [(ngModel)]="nuevoEvento.precio" name="precio" required>
+        </div>
+
+        <div class="campo">
+          <label class="etiqueta">Tipo de Evento</label>
+          <select class="select-rol" [(ngModel)]="nuevoEvento.idTipo" name="tipo">
+            @for (tipo of listaTipos; track tipo.idTipo) {
+            <option [value]="tipo.idTipo">{{ tipo.nombre }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="acciones-form">
+        <button type="submit" class="btn-confirmar">
+          {{ modoEdicion ? 'Actualizar Evento' : 'Crear Evento' }}
+        </button>
+        <button *ngIf="modoEdicion" type="button" class="btn-cerrar" (click)="modoEdicion = false; resetFormulario()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </article>
+
+  <article class="tarjeta-blanca-administracion" style="border: none; box-shadow: none;">
+    <div class="tabla-responsiva">
+      <table class="tabla-gestion">
+        <thead>
+        <tr>
+          <th>Evento</th>
+          <th>Aforo máximo</th>
+          <th>Fecha</th>
+          <th>Precio</th>
+          <th>Estado</th> <th>Opciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (evento of listaEventos; track evento.idEvento) {
+        <tr>
+          <td class="nombre-celda">{{ evento.nombre }}</td>
+          <td>{{ evento.aforoMaximo }}</td>
+          <td>{{ evento.fechaInicio }}</td>
+          <td class="id-celda" style="color: #7b2cbf;">{{ evento.precio }}€</td>
+
+          <td>
+                <span class="etiqueta-estado"
+                      [ngStyle]="{'background-color': evento.estado === 'ACTIVO' ? '#e1f7e7' : '#ffebee',
+                                  'color': evento.estado === 'ACTIVO' ? '#28a745' : '#d0021b'}">
+                  {{ evento.estado }}
+                </span>
+          </td>
+
+          <td class="celda-acciones">
+            <button class="btn-texto edit" (click)="editar(evento.idEvento)">Editar</button>
+
+            @if (evento.estado === 'ACTIVO') {
+            <button class="btn-texto" style="color: #f5a623;" (click)="cancelar(evento.idEvento)">Cancelar</button>
+            } @else {
+            <button class="btn-texto" style="color: #28a745;" (click)="activar(evento.idEvento)">Activar</button>
+            }
+
+            <button class="btn-texto delete" (click)="borrar(evento.idEvento)">Borrar</button>
+          </td>
+        </tr>
+        }
+        </tbody>
+      </table>
+
+      <!--<table class="tabla-gestion">
+        <thead>
+        <tr>
+          <th>Evento</th>
+          <th>Aforo máximo</th>
+          <th>Fecha</th>
+          <th>Precio</th>
+          <th>Opciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (evento of listaEventos; track evento.idEvento) {
+        <tr>
+          <td class="nombre-celda">{{ evento.nombre }}</td>
+          <td>{{ evento.aforoMaximo }}</td>
+          <td>{{ evento.fechaInicio }}</td>
+          <td class="id-celda" style="color: #7b2cbf;">{{ evento.precio }}€</td>
+          <td class="celda-acciones">
+            <button class="btn-texto edit" (click)="editar(evento.idEvento)">Editar</button>
+            <button class="btn-texto" style="color: #f5a623;" (click)="cancelar(evento.idEvento)">Cancelar</button>
+            <button class="btn-texto delete" (click)="borrar(evento.idEvento)">Borrar</button>
+          </td>
+        </tr>
+        }
+        </tbody>
+      </table>-->
+    </div>
+  </article>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<section class="contenedor-gestion-eventos">
 
   <header class="cabecera-seccion-admin">
     <h2 class="titulo-seccion-humano">Gestión de Eventos</h2>
@@ -18,17 +190,17 @@
         </thead>
         <tbody>
         @for (evento of listaEventos; track evento.idEvento) {
-          <tr>
-            <td class="texto-resaltado">{{ evento.nombre }}</td>
-            <td>{{ evento.aforoMaximo }}</td>
-            <td>{{ evento.fechaInicio }}</td>
-            <td class="texto-precio">{{ evento.precio }}€</td>
-            <td class="celda-acciones">
-              <button class="boton-tabla editar" (click)="editar(evento.idEvento)">Editar</button>
-              <button class="boton-tabla cancelar" (click)="cancelar(evento.idEvento)">Cancelar</button>
-              <button class="boton-tabla eliminar" (click)="borrar(evento.idEvento)">Borrar</button>
-            </td>
-          </tr>
+        <tr>
+          <td class="texto-resaltado">{{ evento.nombre }}</td>
+          <td>{{ evento.aforoMaximo }}</td>
+          <td>{{ evento.fechaInicio }}</td>
+          <td class="texto-precio">{{ evento.precio }}€</td>
+          <td class="celda-acciones">
+            <button class="boton-tabla editar" (click)="editar(evento.idEvento)">Editar</button>
+            <button class="boton-tabla cancelar" (click)="cancelar(evento.idEvento)">Cancelar</button>
+            <button class="boton-tabla eliminar" (click)="borrar(evento.idEvento)">Borrar</button>
+          </td>
+        </tr>
         }
         </tbody>
       </table>
@@ -36,21 +208,21 @@
   </article>
 
   <article class="tarjeta-blanca-administracion">
-    
+
     <div class="cabecera-tarjeta-formulario">
       <h5 class="subtitulo-formulario">{{ modoEdicion ? 'Editar Evento' : 'Crear Nuevo Evento' }}</h5>
     </div>
-   
-    <div class="cuerpo-formulario"> 
+
+    <div class="cuerpo-formulario">
       <form (ngSubmit)="guardar()">
-        
+
         <div class="fila-formulario">
-          
+
           <div class="campo-grupo">
             <label class="etiqueta">Nombre del Evento</label>
             <input type="text" class="entrada-texto" [(ngModel)]="nuevoEvento.nombre" name="nombre" placeholder="Ej: Festival Rock">
           </div>
-          
+
           <div>
             <label class="etiqueta" for="descripcion">Descripción</label>
             <input id="descripcion" class="entrada-texto" [(ngModel)]="nuevoEvento.descripcion" name="descripcion" placeholder="Ej: Festival Rock en Madrid durante el mes de julio." required>
@@ -60,7 +232,7 @@
             <label class="etiqueta">Fecha</label>
             <input type="date" class="entrada-texto" [(ngModel)]="nuevoEvento.fechaInicio" name="fechaInicio">
           </div>
-           
+
           <div class="campo-grupo">
             <label class="etiqueta" for="duracion">Duración (minutos)</label>
             <input id="duracion" type="number" class="entrada-texto" [(ngModel)]="nuevoEvento.duracion" name="duracion" required />
@@ -88,12 +260,12 @@
             <label class="etiqueta" for="minimoAsistencia">Mínimo Asistencia</label>
             <input id="minimoAsistencia" type="number" class="entrada-texto" [(ngModel)]="nuevoEvento.minimoAsistencia" name="minimoAsistencia" required />
           </div>
-        
-         <div class="campo-grupo">
+
+          <div class="campo-grupo">
             <label class="etiqueta" for="precio">Precio (€)</label>
             <input id="precio" type="number" class="entrada-texto" [(ngModel)]="nuevoEvento.precio" name="precio" required />
           </div>
-        
+
           <div class="campo-grupo">
             <label class="etiqueta" for="tipo">Tipo de Evento</label>
             <select id="tipo" class="entrada-texto" [(ngModel)]="nuevoEvento.idTipo" name="tipo">
@@ -113,4 +285,4 @@
     </div>
   </article>
 
-</section>
+</section>-->
