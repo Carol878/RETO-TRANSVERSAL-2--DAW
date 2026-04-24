@@ -21,12 +21,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventoService.getEventos().subscribe({
-      next: (datos) => {
-        // En un futuro podríamos filtrar aquí solo los "Destacados"
-        this.eventos = datos;
+      next: (datos: Evento[]) => {
+
+        // Aplicamos el filtro para Activos y Destacados
+        this.eventos = datos.filter(ev =>
+          ev.estado === 'ACTIVO' && ev.destacado === 'S'
+        );
+
         this.cdr.detectChanges();
       },
-      error: (err) => console.error("Error cargando la home:", err)
+      error: (err: any) => console.error("Error cargando la home:", err)
     });
   }
 }

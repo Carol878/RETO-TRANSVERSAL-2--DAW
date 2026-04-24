@@ -3,14 +3,14 @@ html, body {
   margin: 0;
 }
 
-/* Configura el contenedor raíz de Angular como un Flexbox vertical */
+/* Contenedor raíz de Angular como un Flexbox vertical */
 app-root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Esta clase hace que el contenido ocupe todo el espacio sobrante */
+/* El ontenido ocupa todo el espacio sobrante */
 .contenido-principal {
   flex: 1 0 auto;
 }
@@ -18,4 +18,51 @@ app-root {
 /* El footer se mantiene al final sin encogerse */
 app-footer-component {
   flex-shrink: 0;
+}
+/* Hacemos que las tablas se puedan deslizar con el dedo */
+.tabla-responsiva {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  /* Reducimos los márgenes para aprovechar el espacio del móvil */
+  .contenedor-admin {
+    margin: 15px 10px;
+    padding: 15px;
+  }
+
+  .titulo-admin {
+    font-size: 1.5rem;
+  }
+
+  /* Los botones de la tabla se apilan para que sean fáciles de tocar */
+  .celda-acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn-texto {
+    margin-right: 0;
+    text-align: left;
+  }
+  @media (max-width: 768px) {
+    /* Forzamos a que el grid sea de 1 sola columna en pantallas pequeñas */
+    .grid-campos {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Hacemos que los botones de Guardar/Cancelar ocupen todo el ancho */
+    .acciones-form {
+      flex-direction: column;
+    }
+
+    .btn-confirmar, .btn-cerrar {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
 }
