@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+/*import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-gestionperfiles-component',
@@ -9,4 +9,4 @@ import { Component } from '@angular/core';
 })
 export class GestionperfilesComponent {
   // Aquí no iteramos arrays en el HTML (está escrito a mano), así que basta con la clase vacía.
-}
+}*/

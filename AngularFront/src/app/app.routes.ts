@@ -11,7 +11,7 @@ import { EventodetalleComponent } from './pages/eventodetalle-component/eventode
 import { AdminpanelComponent } from './admin/adminpanel-component/adminpanel-component';
 import { GestioneventosComponent } from './admin/gestioneventos-component/gestioneventos-component';
 import { GestionusuariosComponent } from './admin/gestionusuarios-component/gestionusuarios-component';
-import { GestionperfilesComponent } from './admin/gestionperfiles-component/gestionperfiles-component';
+//import { GestionperfilesComponent } from './admin/gestionperfiles-component/gestionperfiles-component';
 import { GestiontipoeventoComponent } from './admin/gestiontipoevento-component/gestiontipoevento-component';
 import { RegisterComponent } from './pages/register-component/register-component';
 
@@ -31,7 +31,7 @@ export const routes: Routes = [
     children: [
       { path: 'eventos', component: GestioneventosComponent },
       { path: 'usuarios', component: GestionusuariosComponent },
-      { path: 'perfiles', component: GestionperfilesComponent },
+      //{ path: 'perfiles', component: GestionperfilesComponent },
       { path: 'tipoevento', component: GestiontipoeventoComponent },
       { path: '', redirectTo: 'eventos', pathMatch: 'full' }
     ]
