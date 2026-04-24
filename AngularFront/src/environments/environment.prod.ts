@@ -1,4 +1,4 @@
-/*export const environment = {
+export const environment = {
   production: true,
-  apiUrl: '/api'
-};*/
+  apiUrl: 'https://antdaw25.com/api'
+};

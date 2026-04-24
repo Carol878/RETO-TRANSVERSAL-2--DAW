@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { jwtDecode} from 'jwt-decode';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -9,18 +10,18 @@ import { jwtDecode} from 'jwt-decode';
 })
 export class AuthService {
 
-private apiUrl = 'http://localhost:9000/';
+private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient, private router: Router) {}
 
   //Login
   login(username: string, password: string) {
-    return this.http.post<{ token: string }>(`${this.apiUrl}usuarios/login`, {username, password});
+    return this.http.post<{ token: string }>(`${this.apiUrl}/usuarios/login`, {username, password});
   }
 
   //Registro
   register(data: any) {
-      return this.http.post(`${this.apiUrl}usuarios/registro`, data);
+      return this.http.post(`${this.apiUrl}/usuarios/registro`, data);
   }
 
   //Token

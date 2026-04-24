@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 
 export interface Reserva {
@@ -20,7 +21,7 @@ export interface Reserva {
 })
 export class ReservaService {
 
-    private apiUrl = 'http://localhost:9000/reservas';
+    private apiUrl = `${environment.apiUrl}/reservas`;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Evento } from '../models/evento.model';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventoService {
-  private apiUrl = 'http://localhost:9000/eventos';
+  private apiUrl = `${environment.apiUrl}/eventos`;
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +23,7 @@ export class EventoService {
 
   findById(id: number): Observable<Evento> {
     // Apuntamos directamente a /eventos/id (o a /eventos/detalle/id si lo pusiste así en tu Java)
-     return this.http.get<Evento>(`http://localhost:9000/eventos/${id}`);
+     return this.http.get<Evento>(`${this.apiUrl}/${id}`);
   }
 
   crearEvento(evento: any): Observable<any> {
