@@ -1,46 +1,89 @@
-<section class="contenedor-gestion-usuarios">
-  <div class="fila-cabecera-pagina">
-    <h2 class="titulo-principal-seccion">Control de Usuarios</h2>
-    <button class="boton-nuevo-registro">+ Crear Nuevo Usuario</button>
+<div class="contenedor-admin">
+  <div class="encabezado-seccion" style="display: flex; justify-content: space-between; align-items: center;">
+    <h2 class="titulo-admin">Listado de Personas Registradas</h2>
+    <button class="btn-nuevo-usuario" (click)="abrirFormularioNuevo()">+ Nuevo Usuario</button>
   </div>
 
-  <div class="tarjeta-blanca-usuarios">
-    <div class="encabezado-tabla-usuarios">
-      <h5 class="subtitulo-seccion">Listado de Personas Registradas</h5>
-    </div>
+  @if (mostrarFormulario) {
+  <div class="caja-formulario">
+    <h3 class="titulo-form">{{ esNuevo ? 'Crear Nuevo Usuario' : 'Editando a: ' + usuarioEdicion.username }}</h3>
+    <div class="grid-campos">
 
-    <div class="espacio-tabla-usuarios">
-      <table class="tabla-humanizada">
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre Completo</th>
-          <th>Correo Electrónico</th>
-          <th>Rol / Perfil</th>
-          <th>Estado Actual</th>
-          <th>Opciones de Gestión</th>
-        </tr>
-        </thead>
-        <tbody>
-        @for (usuario of usuarios; track usuario.id) {
-        <tr>
-          <td class="celda-id">#{{ usuario.id }}</td>
-          <td class="celda-nombre-negrita">{{ usuario.nombre }}</td>
-          <td>{{ usuario.email }}</td>
-          <td>
-            <span class="etiqueta-rol-usuario">{{ usuario.perfil }}</span>
-          </td>
-          <td>
-            <span class="punto-estado-activo">Activo</span>
-          </td>
-          <td class="celda-botones-accion">
-            <button class="enlace-accion-editar">Editar</button>
-            <button class="enlace-accion-borrar">Eliminar</button>
-          </td>
-        </tr>
-        }
-        </tbody>
-      </table>
+      @if (esNuevo) {
+      <div class="campo">
+        <label>Username (ID único):</label>
+        <input [(ngModel)]="usuarioEdicion.username" placeholder="ej: juanperez88">
+      </div>
+      <div class="campo">
+        <label>Contraseña:</label>
+        <input [(ngModel)]="usuarioEdicion.password" type="password" placeholder="Contraseña segura">
+      </div>
+      }
+
+      <div class="campo">
+        <label>Nombre:</label>
+        <input [(ngModel)]="usuarioEdicion.nombre">
+      </div>
+      <div class="campo">
+        <label>Apellidos:</label>
+        <input [(ngModel)]="usuarioEdicion.apellidos">
+      </div>
+      <div class="campo">
+        <label>Correo Electrónico:</label>
+        <input [(ngModel)]="usuarioEdicion.email" type="email">
+      </div>
+      <div class="campo">
+        <label>Dirección:</label>
+        <input [(ngModel)]="usuarioEdicion.direccion">
+      </div>
+
+      <div class="campo">
+        <label>Rol / Perfil:</label>
+        <select [(ngModel)]="rolSeleccionado" class="select-rol">
+          <option value="1">Administrador (ADMON)</option>
+          <option value="2">Cliente (CLIENTE)</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="acciones-form">
+      <button (click)="guardarUsuario()" class="btn-confirmar">{{ esNuevo ? 'Crear Usuario' : 'Guardar Cambios' }}</button>
+      <button (click)="mostrarFormulario = false" class="btn-cerrar">Cancelar</button>
     </div>
   </div>
-</section>
+  }
+
+  <div class="tabla-responsiva">
+    <table class="tabla-gestion">
+      <thead>
+      <tr>
+        <th>ID / Username</th>
+        <th>Nombre Completo</th>
+        <th>Correo Electrónico</th>
+        <th>Rol / Perfil</th>
+        <th>Estado Actual</th>
+        <th>Opciones de Gestión</th>
+      </tr>
+      </thead>
+      <tbody>
+      @for (user of usuarios; track user.username) {
+      <tr>
+        <td class="id-celda">#{{ user.username }}</td>
+        <td class="nombre-celda">{{ user.nombre }} {{ user.apellidos }}</td>
+        <td>{{ user.email }}</td>
+        <td><span class="etiqueta-rol">{{ obtenerRoles(user.perfiles) }}</span></td>
+        <td><span class="etiqueta-estado activo">Activo</span></td>
+        <td class="celda-botones">
+          <button (click)="abrirFormulario(user)" class="btn-texto edit">Editar</button>
+          <button (click)="eliminarUsuario(user.username)" class="btn-texto delete">Eliminar</button>
+        </td>
+      </tr>
+      } @empty {
+      <tr>
+        <td colspan="6" class="tabla-vacia">Cargando base de datos de usuarios...</td>
+      </tr>
+      }
+      </tbody>
+    </table>
+  </div>
+</div>

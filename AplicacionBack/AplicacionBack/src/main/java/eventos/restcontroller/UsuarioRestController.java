@@ -70,7 +70,37 @@ public class UsuarioRestController {
 
 		return ResponseEntity.ok(usuarioService.registerOne(usuario));
 	}
-	
+	// 1. OBTENER TODOS (Quitamos la barra solitaria)
+		@GetMapping
+		ResponseEntity<?> buscarTodos(){
+			return ResponseEntity.ok(usuarioService.findAll());
+		}
+		
+		// OBTENER UNO
+		@GetMapping("/{username}")
+		ResponseEntity<?> buscarUno(@PathVariable String username){
+			return ResponseEntity.ok(usuarioService.findById(username));
+		}
+		
+		// CREAR UNO (Quitamos la barra solitaria)
+		@PostMapping
+		ResponseEntity<?> insertarUno(@RequestBody UsuarioDto usuario){
+			return ResponseEntity.ok(usuarioService.insertFromDto(usuario));
+		}
+
+		// 2. EDITAR (Le ponemos /editar para que coincida con Angular)
+		@PutMapping("/editar")
+		ResponseEntity<?> actualizarUno(@RequestBody UsuarioDto usuario){
+			return ResponseEntity.ok(usuarioService.updateFromDto(usuario));
+		}
+
+		// 3. ELIMINAR (Le ponemos /eliminar para que coincida con Angular)
+		@DeleteMapping("/eliminar/{username}")
+		ResponseEntity<?> eliminarUno(@PathVariable String username){
+			return ResponseEntity.ok(usuarioService.deleteById(username));
+		}
+	}
+	/*
 	@GetMapping("/")
 	ResponseEntity<?> buscarTodos(){
 		return ResponseEntity.ok(usuarioService.findAll());
@@ -93,4 +123,4 @@ public class UsuarioRestController {
 	ResponseEntity<?> eliminarUno(@PathVariable String username){
 		return ResponseEntity.ok(usuarioService.deleteById(username));
 	}
-}
+}*/
