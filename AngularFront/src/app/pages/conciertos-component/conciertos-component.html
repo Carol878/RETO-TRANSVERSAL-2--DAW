@@ -1,4 +1,65 @@
+
 <div class="contenedor-catalogo">
+  <h2 class="titulo-principal">Catálogo de Eventos</h2>
+
+  <div class="row layout-principal">
+
+    <div class="col-lg-3 col-md-4 columna-filtros">
+      <div class="tarjeta-filtros card border-0">
+        <h4 class="titulo-filtros">
+          <i class="bi bi-funnel-fill icono-filtro"></i> Filtros
+        </h4>
+
+        <div class="grupo-filtro">
+          <label class="etiqueta-filtro form-label">Buscar Evento</label>
+          <input type="text"
+                 class="input-filtro form-control"
+                 placeholder="Ej. Festival Indie..."
+                 [(ngModel)]="terminoBusqueda"
+                 (input)="aplicarFiltros()">
+        </div>
+
+        <div class="grupo-filtro">
+          <label class="etiqueta-filtro form-label">Categoría</label>
+          <select class="select-filtro form-select"
+                  [(ngModel)]="categoriaSeleccionada"
+                  (change)="aplicarFiltros()">
+            <option value="">Todas las categorías</option>
+
+            @for (cat of categorias; track cat.idTipo) {
+            <option [value]="cat.nombre">{{ cat.nombre }}</option>
+            }
+          </select>
+        </div>
+
+        <button class="boton-aplicar-filtro btn" (click)="aplicarFiltros()">
+          Actualizar Lista
+        </button>
+      </div>
+    </div>
+
+    <div class="col-lg-9 col-md-8 columna-resultados">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 cuadricula-resultados">
+
+        @for (evento of eventosFiltrados; track evento.idEvento) {
+        <div class="col item-evento">
+          <app-eventocard-component [evento]="evento"></app-eventocard-component>
+        </div>
+        } @empty {
+        <div class="col-12 contenedor-estado-vacio">
+          <div class="tarjeta-estado-vacio">
+            <i class="bi bi-search icono-vacio"></i>
+            <p class="texto-vacio">No hemos encontrado eventos con ese nombre o en esta categoría.</p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--<div class="contenedor-catalogo">
   <h2 class="titulo-principal">Catálogo de Eventos</h2>
 
   <div class="row layout-principal">
@@ -55,4 +116,4 @@
     </div>
 
   </div>
-</div>
+</div>-->
