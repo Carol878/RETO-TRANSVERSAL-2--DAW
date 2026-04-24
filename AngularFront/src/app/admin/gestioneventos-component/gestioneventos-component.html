@@ -74,8 +74,8 @@
           <div class="campo-grupo">
             <label class="etiqueta" for="destacado">Destacado</label>
             <select id="destacado" class="entrada-texto" [(ngModel)]="nuevoEvento.destacado" name="destacado">
-              <option value="NO">No</option>
-              <option value="SI">Sí</option>
+              <option value="N">No</option>
+              <option value="S">Sí</option>
             </select>
           </div>
 
@@ -96,7 +96,7 @@
         
           <div class="campo-grupo">
             <label class="etiqueta" for="tipo">Tipo de Evento</label>
-            <select id="tipo" class="entrada-texto" [(ngModel)]="nuevoEvento.tipo.idTipo" name="tipo">
+            <select id="tipo" class="entrada-texto" [(ngModel)]="nuevoEvento.idTipo" name="tipo">
               <option value="1">Festivales</option>
               <option value="2">Conciertos</option>
             </select>
