@@ -5,7 +5,7 @@ import { Routes } from '@angular/router';
 import { AdminpanelComponent } from './adminpanel-component/adminpanel-component';
 import { GestioneventosComponent } from './gestioneventos-component/gestioneventos-component';
 import { GestionusuariosComponent } from './gestionusuarios-component/gestionusuarios-component';
-import { GestionperfilesComponent } from './gestionperfiles-component/gestionperfiles-component';
+/*import { GestionperfilesComponent } from './gestionperfiles-component/gestionperfiles-component';*/
 import { GestiontipoeventoComponent } from './gestiontipoevento-component/gestiontipoevento-component';
 
 export const routes: Routes = [
@@ -15,7 +15,7 @@ export const routes: Routes = [
     children: [
       { path: 'eventos', component: GestioneventosComponent },
       { path: 'usuarios', component: GestionusuariosComponent },
-      { path: 'perfiles', component: GestionperfilesComponent },
+      /*{ path: 'perfiles', component: GestionperfilesComponent },*/
       { path: 'tipoevento', component: GestiontipoeventoComponent },
       { path: '', redirectTo: 'eventos', pathMatch: 'full' }
     ]

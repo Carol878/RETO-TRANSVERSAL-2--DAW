@@ -1,32 +1,66 @@
-<section class="gestion-categorias-eventos">
-  <div class="encabezado-flexible">
-    <h2 class="titulo-principal-seccion">Categorías de Conciertos</h2>
-    <button class="boton-anadir-categoria">+ Nueva Categoría</button>
+<div class="contenedor-admin">
+  <div class="encabezado-seccion" style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+      <h2 class="titulo-admin">Categorías de Eventos</h2>
+      <p style="color: #666; font-weight: bold; margin-top: 5px;">
+        Gestión de Tipos de Evento del sistema SoundStage.
+      </p>
+    </div>
+    <button class="btn-confirmar" style="padding: 10px 20px;" (click)="abrirFormularioNuevo()">+ Nueva Categoría</button>
   </div>
 
-  <div class="cuadrícula-categorias">
-    <div class="contenedor-tabla-tipos">
-      <table class="tabla-categorias-limpia">
-        <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Descripción</th>
-          <th>Estado</th>
-          <th>Gestión</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td><strong>Rock</strong></td>
-          <td>Eventos de música rock en vivo</td>
-          <td><span class="pildora-activa">En Uso</span></td>
-          <td>
-            <button class="icono-accion">✏️</button>
-            <button class="icono-accion">🗑️</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+  @if (mostrarFormulario) {
+  <div class="caja-formulario">
+    <h3 class="titulo-form">{{ esNuevo ? 'Crear Nueva Categoría' : 'Modificando: ' + tipoEdicion.nombre }}</h3>
+    <div class="grid-campos">
+
+      <div class="campo">
+        <label>Nombre de la Categoría:</label>
+        <input [(ngModel)]="tipoEdicion.nombre"
+               [disabled]="!esNuevo"
+               [style.background-color]="esNuevo ? '#fff' : '#e9ecef'"
+               placeholder="Ej: Teatro, Exposición...">
+      </div>
+
+      <div class="campo completa">
+        <label>Descripción para los clientes:</label>
+        <textarea [(ngModel)]="tipoEdicion.descripcion" rows="4" placeholder="Escribe aquí de qué trata esta categoría..."></textarea>
+      </div>
+
+    </div>
+    <div class="acciones-form">
+      <button (click)="guardarTipo()" class="btn-confirmar">{{ esNuevo ? 'Guardar Nueva Categoría' : 'Actualizar Descripción' }}</button>
+      <button (click)="mostrarFormulario = false" class="btn-cerrar">Cancelar</button>
     </div>
   </div>
-</section>
+  }
+
+  <div class="tabla-responsiva">
+    <table class="tabla-gestion">
+      <thead>
+      <tr>
+        <th style="width: 10%;">ID BBDD</th>
+        <th style="width: 25%;">Tipo de Evento</th>
+        <th style="width: 45%;">Descripción Configurada</th>
+        <th style="width: 20%;">Acciones de Gestión</th>
+      </tr>
+      </thead>
+      <tbody>
+      @for (tipo of tipos; track tipo.idTipo) {
+      <tr>
+        <td class="id-celda">#{{ tipo.idTipo }}</td>
+        <td class="nombre-celda"><span class="etiqueta-tipo">{{ tipo.nombre }}</span></td>
+        <td class="descripcion-celda">{{ tipo.descripcion || 'Sin descripción en la base de datos' }}</td>
+        <td class="celda-botones">
+          <button (click)="abrirFormularioEditar(tipo)" class="btn-texto edit">Editar Info</button>
+        </td>
+      </tr>
+      } @empty {
+      <tr>
+        <td colspan="4" class="tabla-vacia">Cargando datos desde MySQL...</td>
+      </tr>
+      }
+      </tbody>
+    </table>
+  </div>
+</div>
