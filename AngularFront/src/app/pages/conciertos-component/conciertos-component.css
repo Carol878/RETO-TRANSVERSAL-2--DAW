@@ -7,7 +7,7 @@
 
 .titulo-principal {
     text-align: center;
-    font-weight: 800; /* Un poco más de peso */
+    font-weight: 800;
     color: #333;
     margin-bottom: 4rem;
     letter-spacing: -1px;
@@ -20,12 +20,12 @@
 
 /*PANEL DE FILTROS (IZQUIERDA) */
 .tarjeta-filtros {
-    background-color: #fcfcfc; /* Mismo fondo que tus cards */
-    border-radius: 20px;       /* Mismo redondeo que tus cards */
+    background-color: #fcfcfc;
+    border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Sombra igualada */
     position: sticky;
-    top: 30px; /* Se queda pegado al bajar el scroll */
+    top: 30px;
     z-index: 10;
 }
 
@@ -100,7 +100,7 @@
 }
 
 .cuadricula-resultados {
-    justify-content: flex-start; /* Alineadas a la izquierda */
+    justify-content: flex-start;
 }
 
 .item-evento {
@@ -133,4 +133,27 @@
     color: #6c757d;
     font-size: 1.25rem;
     font-weight: 500;
+}
+@media (max-width: 991px) {
+  /* Cambiamos el comportamiento flex para que los filtros pasen arriba */
+  .layout-principal {
+    flex-direction: column;
+  }
+
+  .tarjeta-filtros {
+    position: relative;
+    top: 0;
+    margin-bottom: 30px;
+  }
+
+  /* Ajustamos el padding de los resultados porque ya no hay barra lateral */
+  .columna-resultados {
+    padding-left: 0;
+    padding-top: 15px;
+  }
+
+  .titulo-principal {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
 }
