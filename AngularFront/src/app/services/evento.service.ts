@@ -24,7 +24,7 @@ export class EventoService {
   }
 
   getEventos(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(this.apiUrl, { headers: this.getHeaders() });
+    return this.http.get<Evento[]>(`${this.apiUrl}`, { headers: this.getHeaders() });
   }
 
   // CORREGIDO: Añadida la barra separadora /${id}

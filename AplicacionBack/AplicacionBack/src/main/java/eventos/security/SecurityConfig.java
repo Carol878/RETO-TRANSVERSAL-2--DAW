@@ -42,7 +42,6 @@ public class SecurityConfig {
                         // RUTAS PÚBLICAS
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(
-                                "/login",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/v3/api-docs/**",
@@ -125,7 +124,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         // Damos permiso explícito a tu Angular
         configuration.setAllowedOrigins(
-                Arrays.asList("http://localhost:4200", "http://localhost:9000/eventos/", "http://antdaw25.com"));
+                Arrays.asList("http://localhost:4200", "https://antdaw25.com"));
         // Permitimos todos los métodos
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         // Permitimos las cabeceras de seguridad

@@ -33,10 +33,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String username;
 
         // 1. Si la ruta es /login, no procesamos JWT y dejamos pasar
-        if (request.getRequestURI().equals("/login")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
+        String path = request.getRequestURI();
+
+	     // Rutas públicas (NO pasar por JWT)
+	     if (
+	         path.startsWith("/usuarios/login") ||
+	         path.startsWith("/usuarios/registro") ||
+	         path.startsWith("/eventos") ||
+	         path.startsWith("/tipos")
+	     ) {
+	         filterChain.doFilter(request, response);
+	         return;
+	     }
 
         // 2. Para el resto de rutas, verificamos el token
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
