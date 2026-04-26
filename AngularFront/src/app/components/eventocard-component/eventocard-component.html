@@ -1,9 +1,17 @@
 @if (evento) {
 <div class="card shadow border-0 custom-card">
 
-  <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=500&q=80"
-       class="custom-card-img"
-       alt="Imagen de {{ evento.nombre }}">
+  <picture>
+    <source
+      [srcset]="'img/' + (evento.tipo.nombre | lowercase) + ( (evento.idEvento % 3) + 1 ) + '.webp'"
+      type="image/webp">
+
+    <img
+      [src]="'img/' + (evento.tipo.nombre | lowercase) + ( (evento.idEvento % 3) + 1 ) + '.png'"
+      class="imagen-evento"
+      [alt]="evento.nombre"
+      loading="lazy">
+  </picture>
 
   <div class="card-body d-flex flex-column text-center p-4">
     <h5 class="card-title fw-bold text-uppercase mt-2">{{ evento.nombre }}</h5>

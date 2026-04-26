@@ -19,6 +19,18 @@ app-root {
 app-footer-component {
   flex-shrink: 0;
 }
+/* Corrección global para que la etiqueta picture no rompa los diseños */
+picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Evita que las imágenes se deformen */
+}
 /* Hacemos que las tablas se puedan deslizar con el dedo */
 .tabla-responsiva {
   width: 100%;

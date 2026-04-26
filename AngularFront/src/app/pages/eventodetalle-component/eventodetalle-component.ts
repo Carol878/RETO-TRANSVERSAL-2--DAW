@@ -5,11 +5,12 @@ import { EventoService } from '../../services/evento.service';
 import { AuthService } from '../../services/auth.service';
 import { Evento } from '../../models/evento.model';
 import { ReservaService } from '../../services/reserva.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-eventodetalle-component',
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule,CommonModule],
   templateUrl: './eventodetalle-component.html',
   styleUrl: './eventodetalle-component.css'
 })

@@ -6,11 +6,108 @@
   </a>
 
   <div class="row seccion-principal align-items-center">
+
     <div class="col-lg-6">
-      <img [src]="'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&q=80'"
-           class="imagen-presentacion"
-           alt="{{ evento?.nombre }}">
+      <picture>
+        <source
+          [srcset]="'img/' + (evento.tipo?.nombre | lowercase) + ( (evento.idEvento % 3) + 1 ) + '.webp'"
+          type="image/webp">
+
+        <img
+          [src]="'img/' + (evento.tipo?.nombre | lowercase) + ( (evento.idEvento % 3) + 1 ) + '.png'"
+          class="imagen-presentacion"
+          alt="{{ evento.nombre }}"
+          onerror="this.src='img/jazz1.png'"> </picture>
     </div>
+
+    <div class="col-lg-6">
+      <span class="etiqueta-categoria">{{ evento.tipo?.nombre || 'General' }}</span>
+
+      <h1 class="titulo-evento">{{ evento.nombre }}</h1>
+      <p class="fecha-evento">
+        <strong>Fecha:</strong> {{ evento.fechaInicio }}
+      </p>
+
+      <h4 class="subtitulo-detalle">Descripción</h4>
+      <p class="texto-descripcion">{{ evento.descripcion }}</p>
+
+      <hr class="separador">
+
+      <div class="row contenedor-estadisticas text-center">
+        <div class="col-4">
+          <h5 class="valor-dato">{{ evento.duracion || 0 }} min</h5>
+          <small class="leyenda-dato">Duración</small>
+        </div>
+        <div class="col-4 borde-lateral">
+          <h5 class="valor-dato">{{ evento.plazasDisponibles || 0 }}</h5>
+          <small class="leyenda-dato">Plazas Libres</small>
+        </div>
+        <div class="col-4">
+          <h5 class="valor-dato texto-precio">{{ evento.precio || 0 }} €</h5>
+          <small class="leyenda-dato">Precio/u</small>
+        </div>
+      </div>
+
+      <p class="ubicacion-evento">
+        <strong>Lugar:</strong> {{ evento.direccion }}
+      </p>
+
+      <div class="seccion-reserva-pago">
+        <div class="selector-cantidad">
+          <label for="cantidad">Número de entradas:</label>
+          <input
+            type="number"
+            id="cantidad"
+            name="cantidad"
+            [(ngModel)]="cantidadSeleccionada"
+            min="1"
+            max="6"
+            class="input-cantidad-field"
+          >
+          <span class="limite-texto">(Máx. 6)</span>
+        </div>
+
+        <div class="calculo-total">
+          <span class="texto-total">Precio Total:</span>
+          <strong class="precio-final">
+            {{ (evento.precio || 0) * cantidadSeleccionada }} €
+          </strong>
+        </div>
+
+        <button (click)="reservar()" class="boton-accion-reserva">
+          Reservar Entradas
+        </button>
+      </div>
+    </div> </div> } @else {
+  <div class="contenedor-carga">
+    <div class="spinner-carga" role="status"></div>
+    <p class="texto-carga">Cargando detalles del evento...</p>
+  </div>
+  }
+
+</div>
+
+
+
+<!--<div class="contenedor-detalle-evento">
+
+  @if (evento) {
+  <a routerLink="/concerts" class="boton-volver">
+    ← Volver a Conciertos
+  </a>
+
+  <div class="col-lg-6">
+    <picture>
+      <source
+        [srcset]="'img/' + (evento?.tipo?.nombre | lowercase) + ( (evento?.idEvento % 3) + 1 ) + '.webp'"
+        type="image/webp">
+      <img
+        [src]="'img/' + (evento?.tipo?.nombre | lowercase) + ( (evento?.idEvento % 3) + 1 ) + '.jpg'"
+        class="imagen-presentacion"
+        [alt]="evento?.nombre"
+        loading="lazy">
+    </picture>
+  </div>
 
     <div class="col-lg-6">
       <span class="etiqueta-categoria">{{ evento?.tipo?.nombre || 'General' }}</span>
@@ -79,4 +176,4 @@
   </div>
   }
 
-</div>
+</div>-->
